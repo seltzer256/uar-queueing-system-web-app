@@ -53,7 +53,6 @@ export const ServiceTitle = styled(Typography)`
 `;
 
 export const ServiceDescription = styled(Typography)`
-  font-family: ${({ theme }) => theme.fonts.secondary};
   font-size: 1rem;
   line-height: 1.5rem;
   text-align: center;
