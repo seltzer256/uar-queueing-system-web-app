@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  navHeight: 90,
+  navHeight: 101,
   sectionPadding: "padding-top: 1.5em; padding-bottom: 1.5em;",
   fonts: {
     primary: "Roboto, sans-serif",
@@ -13,26 +13,26 @@ const theme = createTheme({
   palette: {
     primary: {
       // contrastText: "rgba(0, 0, 0, 0.87)",
-      main: "#1976D2",
-      light: "#FFFFFF",
-      dark: "#64748B",
+      main: "#00713D",
+      light: "#00DB75",
+      dark: "#032e19",
     },
     secondary: {
       // contrastText: "rgba(0, 0, 0, 0.87)",
-      main: "#EEEEEE",
-      light: "#FFFFFF",
-      dark: "#9E9E9E",
+      main: "#6A82AE",
+      light: "#90959E",
+      dark: "#61656B",
     },
     tertiary: {
-      main: "#E9E9E9",
-      light: "#FAFAFA",
-      dark: "#757575",
+      main: "#2C13BD",
+      light: "#5C4BBD",
+      dark: "#1A0B70",
     },
     text: {
-      primary: "#212121",
-      secondary: "#616161",
+      primary: "#050100",
+      secondary: "#FFFFE6",
       content: "#000000",
-      tertiary: "#1A2933",
+      tertiary: "#A1ACB3",
       disabled: "#10355A",
       hint: "#10355A",
       light: "#FFFFFF",
