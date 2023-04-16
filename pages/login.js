@@ -20,8 +20,8 @@ export async function getServerSideProps(context) {
 const LoginPage = () => {
   return (
     <Layout
-      belongsToForum
       hideLogin
+      hideFooter
       seo={{
         title: "Login Page",
       }}

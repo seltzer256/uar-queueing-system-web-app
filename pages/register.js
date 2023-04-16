@@ -4,7 +4,7 @@ import Register from "../components/register/register.component";
 const RegisterPage = () => {
   return (
     <Layout
-      belongsToForum
+      hideFooter
       hideRegister
       seo={{
         title: "Register Page",

@@ -18,11 +18,11 @@ const HomeHero = ({ title, subtitle, sliderImages }) => {
   return (
     <S.Section>
       <S.Wrapper>
+        <S.BgFilter />
         <S.TextWrapper>
           <S.Title>{title}</S.Title>
           <S.Subtitle>{subtitle}</S.Subtitle>
         </S.TextWrapper>
-        <S.BgFilter />
         <S.SliderWrapper>
           <S.BgSlider ref={(c) => (slider = c)} {...settings}>
             {sliderImages?.map((image, index) => (
