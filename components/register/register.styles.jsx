@@ -4,7 +4,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import CustomImage from "../custom-image/custom-image.component";
 
 export const Wrapper = styled.section`
-  background: ${({ theme }) => theme.palette.secondary.light};
+  background: ${({ theme }) => theme.palette.text.light};
   position: relative;
   flex: 1;
   display: flex;
@@ -16,6 +16,9 @@ export const BgImage = styled(CustomImage)`
   position: absolute;
   inset: 0;
   bottom: unset;
+  img {
+    object-fit: cover !important;
+  }
 `;
 
 export const Card = styled.form`
@@ -32,7 +35,7 @@ export const Card = styled.form`
   z-index: 2;
 `;
 
-export const StyledBox = styled.div`
+export const StyledBox = styled.form`
   max-width: 600px;
   width: 100%;
   display: flex;
