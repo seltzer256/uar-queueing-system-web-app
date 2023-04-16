@@ -25,7 +25,7 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log("data :>> ", data);
     handleSignIn();
-    // router.push("/");
+    router.push("/");
   };
 
   return (

@@ -12,7 +12,19 @@ const Header = ({ hideLogin, hideRegister }) => {
     disableHysteresis: true,
     threshold: 100,
   });
+  const [anchorEl, setAnchorEl] = useState(null);
   const [accountMenuActive, setAccountMenuActive] = useState(false);
+
+  const open = Boolean(anchorEl);
+
+  const handleOpenAccMenu = (evt) => {
+    console.log("evt :>> ", evt);
+    setAnchorEl(evt.currentTarget);
+  };
+
+  const handleCloseAccMenu = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <S.Header elevation={scrollTrigger ? 4 : 0}>
@@ -22,30 +34,28 @@ const Header = ({ hideLogin, hideRegister }) => {
         </S.LogoWrapper>
         <S.RightWrapper>
           {isLoggedIn ? (
-            <Box style={{ position: "relative" }}>
-              <S.AccountWrapper
-                onClick={() => setAccountMenuActive(!accountMenuActive)}
-              >
-                <S.AccountAvatar img="/assets/images/avatar.png" />
+            <div>
+              <S.AccountWrapper onClick={handleOpenAccMenu}>
+                <S.AccountAvatar
+                  img="/assets/avatars/avatar_1.png"
+                  alt="avatar"
+                />
                 <ArrowDropDownIcon />
               </S.AccountWrapper>
-              {accountMenuActive && (
-                <S.AccountMenu>
+              {isLoggedIn && (
+                <S.AccountMenu
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleCloseAccMenu}
+                >
                   <S.AccountBox>
                     <S.AccountName>John Doe</S.AccountName>
-                    <S.AccountLink url="/profile">View Profile</S.AccountLink>
                   </S.AccountBox>
-                  <S.AccountBox>
-                    <S.AccountLabel style={{ marginBottom: "10px" }}>
-                      Threads: 05
-                    </S.AccountLabel>
-                    <S.AccountLabel>Post: 50</S.AccountLabel>
-                  </S.AccountBox>
-                  <S.AccountBox
-                    className="bottom"
-                    onClick={() => handleLogout()}
-                  >
-                    <S.AccountLabel className="logout">Log out</S.AccountLabel>
+                  {/* <S.AccountBox>
+                    <S.AccountLink url="/profile">Perfil</S.AccountLink>
+                  </S.AccountBox> */}
+                  <S.AccountBox onClick={() => handleLogout()}>
+                    <S.AccountLabel className="logout">Salir</S.AccountLabel>
                   </S.AccountBox>
                   <S.AccountBox className="bottom">
                     <S.AccountLabel
@@ -56,7 +66,7 @@ const Header = ({ hideLogin, hideRegister }) => {
                   </S.AccountBox>
                 </S.AccountMenu>
               )}
-            </Box>
+            </div>
           ) : (
             <>
               {!hideRegister && (

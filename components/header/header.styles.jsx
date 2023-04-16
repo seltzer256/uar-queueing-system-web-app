@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import { AppBar, Container, Typography } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Container,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import CustomButton from "../custom-button/custom-button.component";
 import CustomImage from "../custom-image/custom-image.component";
 import CustomLink from "../custom-link/custom-link.component";
@@ -52,12 +59,14 @@ export const AccountButton = styled(CustomButton)`
   }
 `;
 
-export const AccountWrapper = styled.div`
+export const AccountWrapper = styled(Button)`
   display: flex;
   align-items: center;
-  cursor: pointer;
   svg {
     color: rgba(0, 0, 0, 0.54);
+  }
+  > div {
+    display: flex;
   }
 `;
 
@@ -65,15 +74,11 @@ export const AccountAvatar = styled(CustomImage)`
   max-width: 32px;
 `;
 
-export const AccountMenu = styled.div`
+export const AccountMenu = styled(Menu)`
   background: ${({ theme }) => theme.palette.secondary.light};
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 40px 64px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  position: absolute;
-  width: auto;
-  left: -90px;
-  top: 40px;
 `;
 
 export const AccountName = styled.div`
@@ -86,7 +91,7 @@ export const AccountName = styled.div`
   color: ${({ theme }) => theme.palette.text.primary};
 `;
 
-export const AccountBox = styled.div`
+export const AccountBox = styled(MenuItem)`
   padding: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   &.bottom {
@@ -96,6 +101,8 @@ export const AccountBox = styled.div`
     border-bottom: 0;
   }
 `;
+
+export const AccountLink = styled(CustomLink)``;
 
 export const AccountLabel = styled(Typography)`
   font-size: 0.875rem;

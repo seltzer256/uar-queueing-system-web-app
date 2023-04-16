@@ -35,6 +35,10 @@ export const GlobalStyles = (theme) => css`
     min-height: 100vh;
     flex-direction: column;
   }
+  .MuiPopover-root {
+    background: transparent !important;
+    border: 0 !important;
+  }
 `;
 
 export const LayoutTitle = styled.h2`
