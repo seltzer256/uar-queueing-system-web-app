@@ -13,13 +13,22 @@ import Footer from "../footer/footer.component";
 import Header from "../header/header.component";
 import { AppContainer } from "../../styles/app.styles";
 
-const Layout = ({ seo, children, hideLogin, hideRegister }) => {
+const Layout = ({
+  seo,
+  children,
+  hideLogin,
+  hideRegister,
+  hideTopPadding,
+  hideFooter,
+}) => {
   return (
     <>
       {seo && <SEO data={seo} />}
       <Header hideLogin={hideLogin} hideRegister={hideRegister} />
-      <AppContainer>{children}</AppContainer>
-      <Footer />
+      <AppContainer hidepadding={hideTopPadding ? 1 : 0}>
+        {children}
+      </AppContainer>
+      {!hideFooter && <Footer />}
     </>
   );
 };

@@ -4,6 +4,7 @@ import * as S from "./header.styles.jsx";
 import { AccountContext } from "../../context/account-provider.js";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Box, useScrollTrigger } from "@mui/material";
+import CustomImage from "../custom-image/custom-image.component.jsx";
 
 const Header = ({ hideLogin, hideRegister }) => {
   const { isLoggedIn, handleLogout } = useContext(AccountContext);
@@ -16,7 +17,9 @@ const Header = ({ hideLogin, hideRegister }) => {
   return (
     <S.Header elevation={scrollTrigger ? 4 : 0}>
       <S.Wrapper>
-        <S.Title url="/">BMW Invasion</S.Title>
+        <S.LogoWrapper url="/" className="logo-image">
+          <CustomImage img="/assets/images/espe.png" alt="Espe Logo" />
+        </S.LogoWrapper>
         <S.RightWrapper>
           {isLoggedIn ? (
             <Box style={{ position: "relative" }}>
@@ -57,17 +60,11 @@ const Header = ({ hideLogin, hideRegister }) => {
           ) : (
             <>
               {!hideRegister && (
-                <CustomButton
-                  color="secondary"
-                  variation="dark"
-                  href="/register"
-                >
-                  SIGN UP
-                </CustomButton>
+                <CustomButton href="/register">Registrarse</CustomButton>
               )}
               {!hideLogin && (
                 <CustomButton className="light" href="/login">
-                  LOG IN
+                  Ingresar
                 </CustomButton>
               )}
             </>

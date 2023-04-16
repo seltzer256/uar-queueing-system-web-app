@@ -35,7 +35,6 @@ export const GlobalStyles = (theme) => css`
     min-height: 100vh;
     flex-direction: column;
   }
-
 `;
 
 export const LayoutTitle = styled.h2`
@@ -52,5 +51,10 @@ export const AppContainer = styled.main`
   flex: 1;
   flex-direction: column;
   padding-top: ${({ theme }) => theme.navHeight}px;
-  background-color: #f8fdff;
+  background-color: #fff;
+  ${({ hidepadding }) =>
+    hidepadding &&
+    css`
+      padding-top: 0;
+    `}
 `;

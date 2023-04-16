@@ -5,8 +5,20 @@ import CustomImage from "../custom-image/custom-image.component";
 import CustomLink from "../custom-link/custom-link.component";
 
 export const Header = styled(AppBar)`
-  background-color: ${({ theme }) => theme.palette.secondary.light};
-  padding: 1.5rem 0;
+  background-color: transparent;
+  padding: 1rem 0;
+  &.MuiPaper-elevation4 {
+    padding: 1rem 0;
+    background-color: ${({ theme }) => theme.palette.text.light};
+    .MuiIconButton-root {
+      path {
+        fill: ${({ theme }) => theme.palette.text.content};
+      }
+    }
+    .logo-image {
+      max-width: 150px;
+    }
+  }
 `;
 
 export const Wrapper = styled(Container)`
@@ -97,11 +109,8 @@ export const AccountLabel = styled(Typography)`
   }
 `;
 
-export const AccountLink = styled(CustomLink)`
-  font-size: 0.875rem;
-  line-height: 100%;
-  text-align: center;
-  letter-spacing: 0.15px;
-  color: ${({ theme }) => theme.palette.text.tertiary};
-  display: block;
+export const LogoWrapper = styled(CustomLink)`
+  max-width: 230px;
+  transition: max-width 0.3s ease-in-out;
+  display: flex;
 `;

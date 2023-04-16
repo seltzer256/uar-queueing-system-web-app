@@ -1,22 +1,19 @@
-import { Container } from "@mui/material";
 import Layout from "../components/layout/layout.component";
+import AppServices from "../layouts/AppServices/app-services.component";
+import HomeHero from "../layouts/HomeHero/home-hero.component";
+import { PAGES_DATA } from "../lib/data";
 
 const HomePage = () => {
   return (
     <Layout
       seo={{
-        title: "Community Home Page",
+        title: "Home Page",
       }}
+      hideTopPadding
+      // hideFooter
     >
-      <Container
-        style={{
-          textAlign: "center",
-          paddingTop: "10em",
-          paddingBottom: "10em",
-        }}
-      >
-        <h1>Home Page</h1>
-      </Container>
+      <HomeHero {...PAGES_DATA.HOME} />
+      <AppServices {...PAGES_DATA.APP_SERVICES} />
     </Layout>
   );
 };

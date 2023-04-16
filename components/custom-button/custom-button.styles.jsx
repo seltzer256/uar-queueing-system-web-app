@@ -24,10 +24,10 @@ export const CustomButton = styled(LoadingButton)`
   }
   &.light {
     background-color: transparent;
-    color: ${({ theme }) => theme.palette.secondary.dark};
-    border-color: ${({ theme }) => theme.palette.secondary.dark};
+    color: ${({ theme }) => theme.palette.primary.main};
+    border-color: ${({ theme }) => theme.palette.primary.main};
     &:hover {
-      background-color: ${({ theme }) => theme.palette.secondary.dark};
+      background-color: ${({ theme }) => theme.palette.primary.main};
       color: white;
     }
   }
@@ -67,7 +67,9 @@ export const CustomButton = styled(LoadingButton)`
     }
   }
 
-  &:not(.secondary-light):not(.darkBorder):not(.light):not(.borderLess):hover:not(.dark) {
+  &:not(.secondary-light):not(.darkBorder):not(.light):not(
+      .borderLess
+    ):hover:not(.dark) {
     background-color: ${({ theme, color, variation }) =>
       darken(
         theme.palette[color]
