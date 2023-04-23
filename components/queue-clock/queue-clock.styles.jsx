@@ -23,7 +23,7 @@ export const ClockWrapper = styled.div`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
 
-  circle {
+  .circle {
     display: block;
     width: 20px;
     height: 20px;

@@ -44,7 +44,7 @@ const QueueClock = () => {
           minuteHandLength={85}
           minuteHandWidth={4}
         />
-        <circle />
+        <div className="circle" />
       </div>
 
       <S.Time>{formattedDate}</S.Time>
