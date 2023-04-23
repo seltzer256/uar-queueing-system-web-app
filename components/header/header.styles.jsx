@@ -87,7 +87,6 @@ export const AccountName = styled.div`
   line-height: 100%;
   text-align: center;
   letter-spacing: 0.15px;
-  margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.palette.text.primary};
 `;
 
