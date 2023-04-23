@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import CustomBgImage from "../../components/custom-bg-image/custom-bg-image.component";
 import { Typography } from "@mui/material";
 import "react-clock/dist/Clock.css";
+import CustomLink from "../../components/custom-link/custom-link.component";
 
 export const Section = styled(CustomBgImage)`
   flex: 1;
@@ -14,13 +15,14 @@ export const Section = styled(CustomBgImage)`
   }
 `;
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled(CustomLink)`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 2rem;
   > div {
     max-width: 350px;
+    display: flex;
   }
 `;
 

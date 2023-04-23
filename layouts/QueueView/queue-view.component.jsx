@@ -10,7 +10,7 @@ const QueueView = ({ bgImage }) => {
   return (
     <S.Section img={bgImage}>
       <Container>
-        <S.ImageWrapper>
+        <S.ImageWrapper href="/">
           <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
         </S.ImageWrapper>
         <Grid container spacing={8}>
