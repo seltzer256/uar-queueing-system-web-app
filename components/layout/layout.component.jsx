@@ -20,12 +20,23 @@ const Layout = ({
   hideRegister,
   hideTopPadding,
   hideFooter,
+  hideHeader,
+  staticNav,
 }) => {
   return (
     <>
       {seo && <SEO data={seo} />}
-      <Header hideLogin={hideLogin} hideRegister={hideRegister} />
-      <AppContainer hidepadding={hideTopPadding ? 1 : 0}>
+      {!hideHeader && (
+        <Header
+          hideLogin={hideLogin}
+          hideRegister={hideRegister}
+          staticNav={staticNav}
+        />
+      )}
+      <AppContainer
+        hidepadding={hideTopPadding ? 1 : 0}
+        staticnav={staticNav ? 1 : 0}
+      >
         {children}
       </AppContainer>
       {!hideFooter && <Footer />}

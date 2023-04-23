@@ -7,7 +7,7 @@ import theme from "../theme/theme";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../lib/createEmotionCache";
 import AccountProvider from "../context/account-provider";
-
+import "dayjs/locale/es";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

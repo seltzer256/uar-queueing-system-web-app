@@ -7,7 +7,7 @@ import { useScrollTrigger } from "@mui/material";
 import CustomImage from "../custom-image/custom-image.component.jsx";
 import { useRouter } from "next/router.js";
 
-const Header = ({ hideLogin, hideRegister }) => {
+const Header = ({ hideLogin, hideRegister, staticNav }) => {
   const router = useRouter();
   const { isLoggedIn, handleLogout } = useContext(AccountContext);
   const scrollTrigger = useScrollTrigger({
@@ -28,13 +28,13 @@ const Header = ({ hideLogin, hideRegister }) => {
   };
 
   return (
-    <S.Header elevation={scrollTrigger ? 4 : 0}>
+    <S.Header elevation={scrollTrigger || staticNav ? 4 : 0}>
       <S.Wrapper>
         <S.LogoWrapper url="/" className="logo-image">
           <CustomImage img="/assets/images/espe.png" alt="Espe Logo" />
         </S.LogoWrapper>
         <S.RightWrapper>
-          {!isLoggedIn ? (
+          {isLoggedIn ? (
             <div>
               <S.AccountWrapper onClick={handleOpenAccMenu}>
                 <S.AccountAvatar

@@ -56,9 +56,21 @@ export const AppContainer = styled.main`
   flex-direction: column;
   padding-top: ${({ theme }) => theme.navHeight}px;
   background-color: #fff;
-  ${({ hidepadding }) =>
-    hidepadding &&
-    css`
-      padding-top: 0;
-    `}
+  ${({ staticnav, hidepadding }) => {
+    if (hidepadding) {
+      return (
+        hidepadding &&
+        css`
+          padding-top: 0px;
+        `
+      );
+    }
+
+    return (
+      staticnav &&
+      css`
+        padding-top: 80px;
+      `
+    );
+  }}
 `;
