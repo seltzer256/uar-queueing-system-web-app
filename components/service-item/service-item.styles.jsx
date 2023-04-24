@@ -35,4 +35,7 @@ export const Name = styled(Typography)`
   font-weight: 500;
   font-size: 2.75rem;
   line-height: 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

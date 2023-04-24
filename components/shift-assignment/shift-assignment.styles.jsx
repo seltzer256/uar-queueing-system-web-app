@@ -43,12 +43,14 @@ export const ServicesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  overflow: auto;
+  height: calc(100vh - 335px);
 `;
 
 export const CurrentService = styled.div`
   background-color: ${({ theme }) => theme.palette.text.light};
   padding: 2rem 3rem;
-  max-height: 60vh;
+  max-height: 55vh;
   overflow: auto;
   box-shadow: 2px 2px 20px rgba(0, 0, 63, 0.12);
   border-radius: 8px;

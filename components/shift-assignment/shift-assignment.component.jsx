@@ -33,14 +33,19 @@ const ShiftAssignment = ({ bgImage, services }) => {
           <Grid item xs={12} md={6}>
             <S.Title>Servicios</S.Title>
             <S.ServicesWrapper>
-              {services?.map((el, index) => (
-                <ServiceItem
-                  {...el}
-                  key={`service-item-${index}`}
-                  className={selectedService?.slug === el.slug ? "active" : ""}
-                  onClick={() => handleSelected(index)}
-                />
-              ))}
+              <Grid container spacing={3}>
+                {services?.map((el, index) => (
+                  <Grid item xs={12} key={`service-item-${index}`}>
+                    <ServiceItem
+                      {...el}
+                      className={
+                        selectedService?.slug === el.slug ? "active" : ""
+                      }
+                      onClick={() => handleSelected(index)}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
             </S.ServicesWrapper>
           </Grid>
           <Grid item xs={12} md={6}>

@@ -9,7 +9,7 @@ const QueueView = ({ bgImage }) => {
   // console.log("title :>> ", title);
   return (
     <S.Section img={bgImage}>
-      <Container>
+      <Container maxWidth="xl">
         <S.ImageWrapper href="/">
           <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
         </S.ImageWrapper>
