@@ -29,7 +29,7 @@ const ShiftAssignment = ({ bgImage, services }) => {
         <S.ImageWrapper href="/">
           <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
         </S.ImageWrapper>
-        <Grid container spacing={6} flex={1}>
+        <Grid container flex={1}>
           <Grid item xs={12} md={6}>
             <S.Title>Servicios</S.Title>
             <S.ServicesWrapper>

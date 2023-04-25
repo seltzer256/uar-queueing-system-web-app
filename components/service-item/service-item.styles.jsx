@@ -33,8 +33,8 @@ export const Wrapper = styled.div`
 export const Name = styled(Typography)`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-weight: 500;
-  font-size: 2.75rem;
-  line-height: 4rem;
+  font-size: 2rem;
+  line-height: 3rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

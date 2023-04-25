@@ -45,6 +45,7 @@ export const ServicesWrapper = styled.div`
   gap: 2.5rem;
   overflow: auto;
   height: calc(100vh - 335px);
+  padding-right: 2.5rem;
 `;
 
 export const CurrentService = styled.div`
