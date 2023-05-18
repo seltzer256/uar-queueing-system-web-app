@@ -19,7 +19,7 @@ const ShiftAssignment = ({ bgImage, services }) => {
   const selectedService = services[serviceIndex];
 
   const handleSelected = (index) => {
-    console.log("index :>> ", index);
+    // console.log("index :>> ", index);
     setServiceIndex(index);
   };
 

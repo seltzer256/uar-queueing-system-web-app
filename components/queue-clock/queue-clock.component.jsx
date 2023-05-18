@@ -6,7 +6,7 @@ import Clock from "react-clock";
 const QueueClock = () => {
   dayjs.locale("es");
   const timeInterval = 1000;
-  const [leftTime, setLeftTime] = useState(0);
+  const [leftTime, setLeftTime] = useState(155000);
   const [clockValue, setClockValue] = useState(new Date());
 
   const formattedDate = dayjs(clockValue).format("MMMM DD, hh:mm:ss A");

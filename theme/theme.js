@@ -14,13 +14,13 @@ const theme = createTheme({
     primary: {
       // contrastText: "rgba(0, 0, 0, 0.87)",
       main: "#00713D",
-      light: "#00BD65",
-      dark: "#032e19",
+      light: "#1D871A",
+      dark: "#0B6706",
     },
     secondary: {
       // contrastText: "rgba(0, 0, 0, 0.87)",
       main: "#6A82AE",
-      light: "#90959E",
+      light: "#EDEDF4",
       dark: "#61656B",
     },
     tertiary: {

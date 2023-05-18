@@ -3,9 +3,9 @@ import React, { useState } from "react";
 export const AccountContext = React.createContext();
 
 const AccountProvider = (props) => {
-  //   const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   //   const [isAccountLoading, setIsAccountLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = !!userData;
 
   //   const handleCustomerCreation = async (customerData) => {
   //     if (!isLoggedIn) {
@@ -21,11 +21,11 @@ const AccountProvider = (props) => {
   //   };
 
   const handleSignIn = async (data) => {
-    setIsLoggedIn(true);
+    setUserData({ isLoggedIn: true });
   };
 
   const handleLogout = async (data) => {
-    setIsLoggedIn(false);
+    setUserData({ isLoggedIn: true });
   };
 
   return (
