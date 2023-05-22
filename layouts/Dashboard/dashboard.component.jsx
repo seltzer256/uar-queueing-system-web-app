@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as S from "./dashboard.styles";
 import { Container, Grid, Tab } from "@mui/material";
 import { SIDEBAR_ITEMS } from "../../lib/constants";
 import { TabContext } from "@mui/lab";
+import { AccountContext } from "../../context/account-provider";
 
 const Dashboard = () => {
+  const { userData } = useContext(AccountContext);
   const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.MODULES.value);
 
   const handleChange = (_, newValue) => {

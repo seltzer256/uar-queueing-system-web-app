@@ -1,7 +1,7 @@
 const axios = require("axios");
 
-export const QUEUEING_SYSTEM_API = axios.create({
-  baseURL: "https://localhost:3001",
+export const uarApi = axios.create({
+  baseURL: "http://localhost:3001/api/v1",
 });
 
 export const forismaticApi = axios.create({

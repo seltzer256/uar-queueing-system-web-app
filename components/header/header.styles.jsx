@@ -93,6 +93,7 @@ export const AccountName = styled.div`
 export const AccountBox = styled(MenuItem)`
   padding: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  min-width: 200px;
   &.bottom {
     padding: 0.5rem 1rem;
   }

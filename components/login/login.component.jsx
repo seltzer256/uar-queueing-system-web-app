@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CustomInput from "../custom-input/custom-input.component";
 import * as S from "./login.styles";
 import { FormProvider, useForm } from "react-hook-form";
@@ -7,10 +7,13 @@ import CustomButton from "../custom-button/custom-button.component";
 import { AccountContext } from "../../context/account-provider";
 import { useRouter } from "next/router";
 import AuthWrapper from "../auth-wrapper/auth-wrapper.component";
+import { Alert } from "@mui/material";
+import { setCookie } from "nookies";
 
 const Login = () => {
   const router = useRouter();
-  const { handleSignIn } = useContext(AccountContext);
+  const { handleSignIn, isAccountLoading } = useContext(AccountContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const methods = useForm({
     mode: "onBlur",
     reValidateMode: "onBlur",
@@ -22,10 +25,17 @@ const Login = () => {
 
   const { handleSubmit } = methods;
 
-  const onSubmit = (data) => {
-    console.log("data :>> ", data);
-    handleSignIn();
-    router.push("/");
+  const onSubmit = async (data) => {
+    const res = await handleSignIn(data.email, data.password);
+    if (res?.status === "fail") {
+      setErrorMessage(res?.message);
+      return;
+    }
+    setCookie(null, "jwt", res.token, {
+      maxAge: 15 * 24 * 60 * 60,
+      path: "/",
+    });
+    router.push("/dashboard");
   };
 
   return (
@@ -52,7 +62,8 @@ const Login = () => {
               type="password"
               hideShowPass
             />
-            <CustomButton fullWidth type="submit">
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            <CustomButton fullWidth type="submit" loading={isAccountLoading}>
               Ingresar
             </CustomButton>
           </S.StyledBox>

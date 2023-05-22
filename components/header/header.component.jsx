@@ -27,6 +27,11 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    handleLogout();
+    router.push("/");
+  };
+
   return (
     <S.Header elevation={scrollTrigger || staticNav ? 4 : 0}>
       <S.Wrapper>
@@ -54,18 +59,8 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
                 <S.AccountBox onClick={() => router.push("/dashboard")}>
                   <S.AccountName>Dashboard</S.AccountName>
                 </S.AccountBox>
-                {/* <S.AccountBox>
-                    <S.AccountLink url="/profile">Perfil</S.AccountLink>
-                  </S.AccountBox> */}
-                <S.AccountBox onClick={() => handleLogout()}>
+                <S.AccountBox onClick={handleSignOut}>
                   <S.AccountLabel className="logout">Salir</S.AccountLabel>
-                </S.AccountBox>
-                <S.AccountBox className="bottom">
-                  <S.AccountLabel
-                    style={{ whiteSpace: "nowrap", fontSize: "10px" }}
-                  >
-                    Last session: Aug 20, 2022; 14:02pm
-                  </S.AccountLabel>
                 </S.AccountBox>
               </S.AccountMenu>
             </div>

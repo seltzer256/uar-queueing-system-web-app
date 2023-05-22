@@ -12,6 +12,7 @@ const CustomImage = ({
   priority = false,
   withFallback = false,
   fit = "contain",
+  sizes = "99vw",
   ...props
 }) => {
   if (!img && !img?.sourceUrl) return null;
@@ -19,16 +20,16 @@ const CustomImage = ({
   let imgAlt = alt;
 
   if (!imgAlt) {
-    imgAlt = img.altText ?? img.title;
+    imgAlt = img.altText ? img.altText : img.title;
   }
 
   return (
     <S.Wrapper paddingpercentage={arPaddingPercentage} className={className}>
       <Image
-        priority={priority}
+        sizes={sizes}
         fill
+        priority={priority}
         style={{ objectFit: fit }}
-        sizes="100%"
         src={img?.sourceUrl ?? img}
         alt={imgAlt}
         {...props}
@@ -39,9 +40,11 @@ const CustomImage = ({
 
 CustomImage.propTypes = {
   img: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  sizes: PropTypes.string,
   layout: PropTypes.string,
-  priority: PropTypes.string,
+  priority: PropTypes.bool,
   arPaddingPercentage: PropTypes.number,
+  fit: PropTypes.string,
 };
 
 export default CustomImage;

@@ -12,7 +12,6 @@ export const StyledBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   &.items {
     gap: 1rem;
   }
@@ -25,7 +24,7 @@ export const ForgotPassword = styled(CustomLink)`
   letter-spacing: 0.46px;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.38);
-  margin-top: 0.25rem;
+  margin-top: 0.75rem;
   margin-bottom: 2.25rem;
   transition: color 0.3s ease-in-out;
   :hover {

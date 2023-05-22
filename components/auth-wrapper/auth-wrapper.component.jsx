@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./auth-wrapper.styles";
-import { useState } from "react";
-import { useEffect } from "react";
 import { getPhraseOfTheDay } from "../../lib/utils";
 
 const AuthWrapper = ({ children }) => {
   const [phrase, setPhrase] = useState("");
 
-  // useEffect(() => {
-  //   const res = getPhraseOfTheDay();
-  // }, []);
+  const handleGetPhrase = async () => {
+    const res = await getPhraseOfTheDay();
+    console.log("res :>> ", res);
+  };
   return (
     <S.Wrapper>
       <S.BgImage
         img="/assets/images/home_4.jpg"
         alt="BMW M5"
+        priority={true}
         arPaddingPercentage={40}
       />
       <S.Card>

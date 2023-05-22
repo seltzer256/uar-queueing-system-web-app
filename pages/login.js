@@ -1,19 +1,27 @@
 import Layout from "../components/layout/layout.component";
 import Login from "../components/login/login.component";
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { getLocalStorageItem } from "../lib/utils";
-import { USER_ID } from "../lib/constants";
+import React from "react";
+import nookies from "nookies";
+
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+  const token = cookies.jwt;
+
+  if (token) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 const LoginPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (getLocalStorageItem(USER_ID)) {
-      router.push("/");
-    }
-  }, []);
-
   return (
     <Layout
       hideLogin

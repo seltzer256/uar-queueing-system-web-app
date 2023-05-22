@@ -1,31 +1,60 @@
 import React, { useState } from "react";
+import { getMe, signIn, signUp } from "../lib/uar-api-utils";
+import { destroyCookie, parseCookies } from "nookies";
+import { useEffect } from "react";
 
 export const AccountContext = React.createContext();
 
 const AccountProvider = (props) => {
+  const [isAccountLoading, setIsAccountLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   //   const [isAccountLoading, setIsAccountLoading] = useState(false);
   const isLoggedIn = !!userData;
 
-  //   const handleCustomerCreation = async (customerData) => {
-  //     if (!isLoggedIn) {
-  //       const data = await createUserAccount(customerData);
-  //       if (data && data.id) {
-  //         await handleSignIn({
-  //           username: customerData.email,
-  //           password: customerData.password,
-  //         });
-  //         return data;
-  //       }
-  //     }
-  //   };
-
-  const handleSignIn = async (data) => {
-    setUserData({ isLoggedIn: true });
+  const getUserData = async () => {
+    const cookies = parseCookies();
+    const token = cookies?.jwt;
+    const data = await getMe(token);
+    // console.log("data :>> ", data);
+    if (!data) {
+      destroyCookie(undefined, "jwt", {
+        path: "/",
+      });
+      return;
+    }
+    setUserData({ ...data?.data?.users });
   };
 
-  const handleLogout = async (data) => {
-    setUserData({ isLoggedIn: true });
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const handleSignIn = async (email, password) => {
+    setIsAccountLoading(true);
+    const res = await signIn(email, password);
+    if (res?.status === "success") {
+      setUserData(res?.data?.user);
+    }
+    setIsAccountLoading(false);
+    return res;
+  };
+
+  const handleSignUp = async (data) => {
+    setIsAccountLoading(true);
+    const res = await signUp(data);
+    // console.log("res :>> ", res);
+    if (res?.status === "success") {
+      setUserData(res?.data?.user);
+    }
+    setIsAccountLoading(false);
+    return res;
+  };
+
+  const handleLogout = () => {
+    setUserData(null);
+    destroyCookie(undefined, "jwt", {
+      path: "/",
+    });
   };
 
   return (
@@ -34,6 +63,9 @@ const AccountProvider = (props) => {
         isLoggedIn,
         handleSignIn,
         handleLogout,
+        handleSignUp,
+        userData,
+        isAccountLoading,
       }}
     >
       {props.children}

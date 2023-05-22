@@ -4,7 +4,7 @@ import * as S from "./custom-bg-image.styles";
 import Image from "next/image";
 
 const CustomBgImage = (props) => {
-  const { img, tag, fallback, children, ...otherProps } = props;
+  const { img, tag, fallback, children, fit = "cover", ...otherProps } = props;
 
   if (!img && !img.sourceUrl) {
     return <section {...props}>{children}</section>;
@@ -16,6 +16,7 @@ const CustomBgImage = (props) => {
         <Image
           fill
           src={img?.sourceUrl ?? img}
+          style={{ objectFit: fit }}
           role="presentation"
           alt=""
           sizes="100%"
