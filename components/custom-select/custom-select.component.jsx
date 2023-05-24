@@ -16,6 +16,7 @@ const CustomSelect = ({
   rules = { required: true },
   onChange,
   placeholder,
+  multiple,
   ...otherProps
 }) => {
   const { control } = useFormContext() ?? { formState: { errors: {} } };
@@ -58,7 +59,7 @@ const CustomSelect = ({
   }
 
   return (
-    <S.StyledFormControl fullWidth variant="filled">
+    <S.StyledFormControl fullWidth variant="outlined">
       {label && (
         <S.StyledLabel className="input-label">
           {label ? label : placeholder}
@@ -77,25 +78,26 @@ const CustomSelect = ({
             value={value}
             onChange={(evt) => handleChange(evt, onChange)}
             className="input-container"
+            multiple={multiple}
           >
             {placeholder && (
-              <option value="" disabled hidden>
+              <MenuItem value="" disabled hidden>
                 {placeholder}
-              </option>
+              </MenuItem>
             )}
             {isArray
               ? items.map((item, index) => (
-                  <option value={item[valueKey]} key={`menu-${index}`}>
+                  <MenuItem value={item[valueKey]} key={`menu-${index}`}>
                     {item[titleKey]}
-                  </option>
+                  </MenuItem>
                 ))
               : Object.keys(items).map((key, index) => (
-                  <option
+                  <MenuItem
                     value={items[key][valueKey] ? items[key][valueKey] : key}
                     key={`menu-${index}`}
                   >
                     {items[key][titleKey] ? items[key][titleKey] : items[key]}
-                  </option>
+                  </MenuItem>
                 ))}
           </S.StyledSelect>
         )}

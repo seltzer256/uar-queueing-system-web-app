@@ -13,30 +13,28 @@ export const Title = styled(Typography)`
 `;
 
 export const CustomInput = styled(TextField)`
-  font-weight: 500;
   font-size: 1rem;
-  line-height: 19px;
-  letter-spacing: -0.01em;
-  //opacity: 0.5;
+  line-height: 1.5rem;
+  letter-spacing: 0.15px;
   width: 100%;
   .MuiInputLabel-root {
-    color: ${({ theme }) => theme.palette.text.content};
+    color: rgba(0, 0, 0, 0.87);
     padding: 0;
-    opacity: 0.5;
+    opacity: 0.6;
   }
-  .MuiInputBase-root {
-    padding-right: 0;
+  input {
+    color: ${({ theme }) => theme.palette.text.content};
+  }
+  .MuiOutlinedInput-root {
+    background: #f7f7f7;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
   }
   textarea {
-    /* height: 150px !important; */
+    height: 100px !important;
+    color: rgba(0, 0, 0, 0.87);
     overflow-y: auto !important;
-  }
-
-  /* .MuiOutlinedInput-root {
-    border-radius: 250px;
-  } */
-  .MuiOutlinedInput-notchedOutline {
-    border-color: rgba(0, 0, 0, 0.23);
   }
 
   .Mui-focused {
@@ -45,7 +43,7 @@ export const CustomInput = styled(TextField)`
     }
     &.Mui-error {
       fieldset {
-        border-color: ${({ theme }) => theme.palette.primary.main} !important;
+        border-color: ${({ theme }) => theme.palette.text.error} !important;
       }
     }
   }
