@@ -10,7 +10,7 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
 });
 
-const ControlledWysiwyg = ({ name, rules }) => {
+const ControlledWysiwyg = ({ name, rules, label }) => {
   const { control } = useFormContext();
 
   if (!control) return null;
@@ -26,6 +26,12 @@ const ControlledWysiwyg = ({ name, rules }) => {
 
   return (
     <RhfErrorHandler name={name} rules={rules}>
+      {label && (
+        <S.StyledLabel className="input-label">
+          {label}
+          {rules.required && " *"}
+        </S.StyledLabel>
+      )}
       <Controller
         name={name}
         rules={rules}
@@ -61,7 +67,11 @@ const ControlledWysiwyg = ({ name, rules }) => {
                     "list",
                     //   "lineHeight",
                   ],
-                  ["table", "link", "image"],
+                  [
+                    "table",
+                    "link",
+                    // "image"
+                  ],
                   // ["imageGallery"],
                   ["fullScreen", "showBlocks", "codeView"],
                   // ["preview", "print"],

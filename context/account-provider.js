@@ -16,7 +16,8 @@ const AccountProvider = (props) => {
     const token = cookies?.jwt;
     const data = await getMe(token);
     // console.log("data :>> ", data);
-    if (!data) {
+    if (!data || data.status === "error") {
+      setUserData(null);
       destroyCookie(undefined, "jwt", {
         path: "/",
       });
