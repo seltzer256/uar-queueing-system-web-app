@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./modules-tab.styles";
 import {
+  Checkbox,
   Grid,
   IconButton,
   Table,
@@ -17,7 +18,7 @@ import {
   getUsers,
   updateModule,
 } from "../../lib/uar-api-utils";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import CustomInput from "../../components/custom-input/custom-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomSelect from "../../components/custom-select/custom-select.component";
@@ -34,6 +35,8 @@ const ModulesTab = () => {
       user: [],
       name: "",
       code: "",
+      active: true,
+      authRequired: false,
     },
   });
   const [selectedModule, setSelectedModule] = useState(null);
@@ -41,25 +44,25 @@ const ModulesTab = () => {
   const [services, setServices] = useState([]);
   const [users, setUsers] = useState([]);
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, control } = methods;
   // console.log("modules :>> ", modules);
 
   const handleGetModules = async () => {
     const res = await getModules();
     // console.log("res :>> ", res);
-    setModules(res.data);
+    setModules(res?.data);
   };
 
   const handleGetServices = async () => {
     const res = await getServices();
     // console.log("res :>> ", res);
-    setServices(res.data);
+    setServices(res?.data);
   };
 
   const handleGetUsers = async () => {
     const res = await getUsers();
     // console.log("res :>> ", res);
-    setUsers(res.data);
+    setUsers(res?.data);
   };
 
   const handleAddNew = () => {
@@ -72,8 +75,7 @@ const ModulesTab = () => {
     const userIds = module.user.map((user) => (justCreated ? user : user._id));
     // console.log("userIds :>> ", userIds);
     reset({
-      name: module.name,
-      code: module.code,
+      ...module,
       service: justCreated ? module.service : module.service._id,
       user: userIds,
     });
@@ -126,7 +128,7 @@ const ModulesTab = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {modules.map((row) => (
+            {modules?.map((row) => (
               <S.BodyRow
                 key={row._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -207,6 +209,36 @@ const ModulesTab = () => {
                 placeholder="Seleccione uno o más usuarios"
                 // isArray
               />
+            </Grid>
+            <Grid item xs={4}>
+              <S.CheckboxWrapper>
+                <Controller
+                  name="active"
+                  control={control}
+                  // defaultValue={true}
+                  render={({ field: { value, onChange } }) => (
+                    <S.StyledControlLabel
+                      control={<Checkbox checked={value} onChange={onChange} />}
+                      label="Activo"
+                    />
+                  )}
+                />
+              </S.CheckboxWrapper>
+            </Grid>
+            <Grid item xs={4}>
+              <S.CheckboxWrapper>
+                <Controller
+                  name="authRequired"
+                  control={control}
+                  // defaultValue={false}
+                  render={({ field: { value, onChange } }) => (
+                    <S.StyledControlLabel
+                      control={<Checkbox checked={value} onChange={onChange} />}
+                      label="Requiere autenticación"
+                    />
+                  )}
+                />
+              </S.CheckboxWrapper>
             </Grid>
           </Grid>
           <S.BottomWrapper>

@@ -62,7 +62,7 @@ const ServicesTab = () => {
       ...data,
     });
 
-    console.log("res :>> ", res);
+    // console.log("res :>> ", res);
     if (!res || res.status === "error") {
       toast.error("Error al actualizar el servicio");
       return;

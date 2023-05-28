@@ -6,11 +6,13 @@ import { TabContext } from "@mui/lab";
 import { AccountContext } from "../../context/account-provider";
 import ModulesTab from "../ModulesTab/modules-tab.component";
 import ServicesTab from "../ServicesTab/services-tab.component";
+import ShiftsTab from "../ShiftsTab/shifts-tab.component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../../components/spinner/spinner.component";
 
 const Dashboard = () => {
-  const { userData } = useContext(AccountContext);
+  const { isAccountLoading } = useContext(AccountContext);
   const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.MODULES.value);
 
   const handleChange = (_, newValue) => {
@@ -39,17 +41,21 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12} md={9}>
               <S.RightWrapper>
-                <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
-                  <ModulesTab />
-                </S.StyledTabPanel>
-                <S.StyledTabPanel value={SIDEBAR_ITEMS.SERVICES.value}>
-                  <ServicesTab />
-                </S.StyledTabPanel>
-                {/* {Object.values(SIDEBAR_ITEMS).map(({ value, name }, index) => (
-                  <S.StyledTabPanel value={value} key={`tab-panel-${index}`}>
-                    {name}
-                  </S.StyledTabPanel>
-                ))} */}
+                {isAccountLoading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
+                      <ModulesTab />
+                    </S.StyledTabPanel>
+                    <S.StyledTabPanel value={SIDEBAR_ITEMS.SERVICES.value}>
+                      <ServicesTab />
+                    </S.StyledTabPanel>
+                    <S.StyledTabPanel value={SIDEBAR_ITEMS.SHIFTS.value}>
+                      <ShiftsTab />
+                    </S.StyledTabPanel>
+                  </>
+                )}
               </S.RightWrapper>
             </Grid>
           </Grid>

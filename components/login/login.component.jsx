@@ -31,7 +31,7 @@ const Login = () => {
       setErrorMessage(res?.message);
       return;
     }
-    setCookie(null, "jwt", res.token, {
+    setCookie(null, "jwt", res?.token, {
       maxAge: 15 * 24 * 60 * 60,
       path: "/",
     });

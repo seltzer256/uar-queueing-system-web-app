@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { TableContainer, TableRow, Typography } from "@mui/material";
+import {
+  FormControlLabel,
+  TableContainer,
+  TableRow,
+  Typography,
+} from "@mui/material";
 
 export const Wrapper = styled.div`
   padding: 1rem;
@@ -51,4 +56,20 @@ export const StyledBox = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+`;
+
+export const CheckboxWrapper = styled.div`
+  margin-left: 0.75rem;
+`;
+
+export const StyledControlLabel = styled(FormControlLabel)`
+  svg {
+    color: #1c1c1c;
+  }
+  &.MuiFormControlLabel-root {
+    align-items: center;
+  }
+  .MuiFormControlLabel-label {
+    margin-top: 2px;
+  }
 `;

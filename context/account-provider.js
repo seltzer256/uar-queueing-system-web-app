@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getMe, signIn, signUp } from "../lib/uar-api-utils";
-import { destroyCookie, parseCookies } from "nookies";
+import { destroyCookie } from "nookies";
 import { useEffect } from "react";
 
 export const AccountContext = React.createContext();
@@ -12,11 +12,11 @@ const AccountProvider = (props) => {
   const isLoggedIn = !!userData;
 
   const getUserData = async () => {
-    const cookies = parseCookies();
-    const token = cookies?.jwt;
-    const data = await getMe(token);
+    setIsAccountLoading(true);
+    const data = await getMe();
     // console.log("data :>> ", data);
     if (!data || data.status === "error") {
+      setIsAccountLoading(false);
       setUserData(null);
       destroyCookie(undefined, "jwt", {
         path: "/",
@@ -24,6 +24,7 @@ const AccountProvider = (props) => {
       return;
     }
     setUserData({ ...data?.data?.users });
+    setIsAccountLoading(false);
   };
 
   useEffect(() => {
