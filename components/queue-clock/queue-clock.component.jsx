@@ -9,7 +9,7 @@ const QueueClock = () => {
   const [leftTime, setLeftTime] = useState(155000);
   const [clockValue, setClockValue] = useState(new Date());
 
-  const formattedDate = dayjs(clockValue).format("MMMM DD, hh:mm:ss A");
+  const formattedDate = dayjs(clockValue).format("MMMM DD, hh:mm A");
 
   // console.log("leftTime :>> ", leftTime);
   useEffect(() => {

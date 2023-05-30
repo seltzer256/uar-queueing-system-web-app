@@ -75,7 +75,9 @@ export const ShiftTitle = styled(Typography)`
 
 export const Module = styled(Typography)`
   font-family: ${({ theme }) => theme.fonts.secondary};
-  font-size: 4rem;
-  line-height: 5rem;
+  font-size: 3rem;
+  line-height: 4rem;
   font-weight: 700;
+  max-width: 60%;
+  text-align: right;
 `;

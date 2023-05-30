@@ -57,4 +57,7 @@ export const Module = styled(Typography)`
   font-size: 3rem;
   line-height: 4rem;
   text-align: end;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
