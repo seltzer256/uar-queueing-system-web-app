@@ -13,6 +13,30 @@ export const Wrapper = styled.div`
 
 export const LeftWrapper = styled.div`
   padding: 1rem 1.5rem;
+  position: relative;
+`;
+
+export const Status = styled.div`
+  position: absolute;
+  inset: 0;
+  &.completed {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 113, 61, 0.2),
+      rgba(0, 113, 61, 0.2) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
+  &.cancelled {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(211, 47, 47, 0.2),
+      rgba(211, 47, 47, 0.2) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
 `;
 
 export const RightWrapper = styled.div`
