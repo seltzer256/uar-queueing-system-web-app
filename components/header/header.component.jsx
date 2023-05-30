@@ -9,13 +9,13 @@ import { useRouter } from "next/router.js";
 
 const Header = ({ hideLogin, hideRegister, staticNav }) => {
   const router = useRouter();
-  const { isLoggedIn, handleLogout } = useContext(AccountContext);
+  const { isLoggedIn, handleLogout, isAvailable, updateUser } =
+    useContext(AccountContext);
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100,
   });
   const [anchorEl, setAnchorEl] = useState(null);
-  const [accountMenuActive, setAccountMenuActive] = useState(false);
 
   const open = Boolean(anchorEl);
 
@@ -30,6 +30,13 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
   const handleSignOut = () => {
     handleLogout();
     router.push("/");
+  };
+
+  const handleChangeAvailable = async () => {
+    updateUser({
+      isAvailable: !isAvailable,
+    });
+    // setAccountMenuActive(!accountMenuActive);
   };
 
   return (
@@ -55,6 +62,10 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
               >
                 <S.AccountBox onClick={() => router.push("/perfil")}>
                   <S.AccountName>John Doe</S.AccountName>
+                </S.AccountBox>
+                <S.AccountBox onClick={handleChangeAvailable}>
+                  <S.AccountName>Disponible</S.AccountName>
+                  <S.StyledCheckBox checked={isAvailable} />
                 </S.AccountBox>
                 <S.AccountBox onClick={() => router.push("/dashboard")}>
                   <S.AccountName>Dashboard</S.AccountName>

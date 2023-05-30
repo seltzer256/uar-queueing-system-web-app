@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getMe, signIn, signUp } from "../lib/uar-api-utils";
+import { getMe, signIn, signUp, updateMe } from "../lib/uar-api-utils";
 import { destroyCookie } from "nookies";
 import { useEffect } from "react";
 
@@ -8,9 +8,10 @@ export const AccountContext = React.createContext();
 const AccountProvider = (props) => {
   const [isAccountLoading, setIsAccountLoading] = useState(false);
   const [userData, setUserData] = useState(null);
-  //   const [isAccountLoading, setIsAccountLoading] = useState(false);
   const isLoggedIn = !!userData;
+  const isAvailable = userData?.isAvailable;
 
+  // console.log("userData :>> ", userData);
   const getUserData = async () => {
     setIsAccountLoading(true);
     const data = await getMe();
@@ -59,6 +60,16 @@ const AccountProvider = (props) => {
     });
   };
 
+  const handleChangeUserData = async (data) => {
+    setIsAccountLoading(true);
+    const newData = { ...userData, ...data };
+    // console.log("newData :>> ", newData);
+    const res = await updateMe(newData);
+    // console.log("res :>> ", res);
+    setUserData(res?.data?.user);
+    setIsAccountLoading(false);
+  };
+
   return (
     <AccountContext.Provider
       value={{
@@ -67,7 +78,9 @@ const AccountProvider = (props) => {
         handleLogout,
         handleSignUp,
         userData,
+        updateUser: handleChangeUserData,
         isAccountLoading,
+        isAvailable,
       }}
     >
       {props.children}

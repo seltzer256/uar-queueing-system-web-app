@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import {
   AppBar,
   Button,
+  Checkbox,
   Container,
   Menu,
   MenuItem,
@@ -94,6 +95,8 @@ export const AccountBox = styled(MenuItem)`
   padding: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-width: 200px;
+  justify-content: space-between;
+  height: 48px;
   &.bottom {
     padding: 0.5rem 1rem;
   }
@@ -120,4 +123,8 @@ export const LogoWrapper = styled(CustomLink)`
   max-width: 230px;
   transition: max-width 0.3s ease-in-out;
   display: flex;
+`;
+
+export const StyledCheckBox = styled(Checkbox)`
+  padding: 0;
 `;
