@@ -20,7 +20,7 @@ const ShiftsTab = () => {
     ({ state }) => state === SHIFT_STATUS.IN_PROGRESS
   );
 
-  // console.log("pendingShifts :>> ", pendingShifts);
+  // console.log("completedShifts :>> ", completedShifts);
   const handleGetShifts = async () => {
     const res = await getShiftsByUser();
     // console.log("res :>> ", res);
@@ -82,7 +82,7 @@ const ShiftsTab = () => {
                     <S.QueueItem
                       key={`completed-shift-${index}`}
                       code={shift.code}
-                      module={shift.module._id.name}
+                      module={shift.module?._id?.name}
                       status={shift.state}
                     />
                   ))}

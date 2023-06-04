@@ -22,8 +22,8 @@ export const Section = styled(CustomBgImage)`
 export const Title = styled(Typography)`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-weight: 700;
-  font-size: 3.5rem;
-  line-height: 4.5rem;
+  font-size: 2.5rem;
+  line-height: 3.5rem;
   text-transform: uppercase;
   margin-bottom: 2rem;
 `;
@@ -55,35 +55,12 @@ export const CurrentService = styled.div`
   overflow: auto;
   box-shadow: 2px 2px 20px rgba(0, 0, 63, 0.12);
   border-radius: 8px;
-  p,
-  h1,
-  h2,
-  h3 {
-    margin: 1rem 0;
-    font-size: 2rem;
-    line-height: 3rem;
-  }
-  h1,
-  h2,
-  h3 {
-    font-weight: 700;
-  }
-  li {
-    margin: 1rem 0;
-    font-size: 1.75rem;
-    line-height: 2.5rem;
-  }
-  p,
-  h1,
-  h2,
-  h3 {
-    :first-of-type {
-      margin-top: 0;
-    }
-    :last-of-type {
-      margin-bottom: 0;
-    }
-  }
+`;
+
+export const OptionsTitle = styled(Typography)`
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
 `;
 
 export const RightWrapper = styled.div`
@@ -111,4 +88,17 @@ export const StyledOptionGroup = styled(FormControl)`
     font-size: 1.75rem;
     line-height: 2.5rem;
   }
+`;
+
+export const DialogForm = styled.div`
+  padding: 2.5rem 1.75rem;
+  width: 350px;
+`;
+
+export const DialogTitle = styled(Typography)`
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  color: ${({ theme }) => theme.palette.primary.main};
+  font-weight: 700;
+  margin-bottom: 1rem;
 `;

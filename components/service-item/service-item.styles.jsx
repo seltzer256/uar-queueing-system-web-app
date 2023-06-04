@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
     }
   }
   svg {
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     color: ${({ theme }) => theme.palette.text.light};
   }
 `;
@@ -33,8 +33,8 @@ export const Wrapper = styled.div`
 export const Name = styled(Typography)`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-weight: 500;
-  font-size: 2rem;
-  line-height: 3rem;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

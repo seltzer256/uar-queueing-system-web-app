@@ -11,10 +11,10 @@ const ShiftAssignmentPage = () => {
       hideTopPadding
       staticNav
       seo={{
-        title: "Login Page",
+        title: "Turnos",
       }}
     >
-      <ShiftAssignment {...PAGES_DATA.SHIFT_ASSIGNMENT} />
+      <ShiftAssignment />
     </Layout>
   );
 };

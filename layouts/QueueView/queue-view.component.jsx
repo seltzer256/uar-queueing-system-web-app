@@ -54,8 +54,8 @@ const QueueView = ({ bgImage }) => {
             <S.RightWrapper>
               {/* <S.Subtitle>Turno</S.Subtitle> */}
               <S.StyledBox>
-                <S.ShiftTitle>{currentShift.code}</S.ShiftTitle>
-                <S.Module>{currentShift.module._id.name}</S.Module>
+                <S.ShiftTitle>{currentShift?.code}</S.ShiftTitle>
+                <S.Module>{currentShift?.module._id.name}</S.Module>
               </S.StyledBox>
               <DynamicClock />
             </S.RightWrapper>
