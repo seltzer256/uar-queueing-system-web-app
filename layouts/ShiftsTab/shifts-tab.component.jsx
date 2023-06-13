@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as S from "./shifts-tab.styles";
 import { changeShiftStatus, getShiftsByUser } from "../../lib/uar-api-utils";
 import { Box, Grid, IconButton, Tooltip } from "@mui/material";
@@ -6,8 +6,11 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import { SHIFT_STATUS } from "../../lib/constants";
 import CloseIcon from "@mui/icons-material/Close";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import socket from "../../lib/socket";
+import { AccountContext } from "../../context/account-provider";
 
 const ShiftsTab = () => {
+  const { userData } = useContext(AccountContext);
   const [shifts, setShifts] = useState([]);
   const pendingShifts = shifts.filter(
     ({ state }) => state === SHIFT_STATUS.ON_HOLD
@@ -47,6 +50,22 @@ const ShiftsTab = () => {
   // console.log("shifts :>> ", shifts);
   useEffect(() => {
     handleGetShifts();
+    socket.connect();
+
+    socket.on("shiftCreated", (data) => {
+      // console.log("data :>> ", data);
+      // console.log("userData :>> ", userData);
+      if (userData._id === data) {
+        // console.log("new shift");
+        // console.log("data :>> ", data);
+        handleGetShifts();
+      }
+    });
+
+    return () => {
+      socket.off("shiftCreated");
+      socket.disconnect();
+    };
   }, []);
 
   return (

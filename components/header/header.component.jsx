@@ -33,7 +33,7 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
   };
 
   const handleChangeAvailable = async () => {
-    updateUser({
+    await updateUser({
       isAvailable: !isAvailable,
     });
     // setAccountMenuActive(!accountMenuActive);

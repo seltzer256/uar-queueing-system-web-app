@@ -7,8 +7,6 @@ import { AccountContext } from "../../context/account-provider";
 import ModulesTab from "../ModulesTab/modules-tab.component";
 import ServicesTab from "../ServicesTab/services-tab.component";
 import ShiftsTab from "../ShiftsTab/shifts-tab.component";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../../components/spinner/spinner.component";
 
 const Dashboard = () => {
@@ -60,7 +58,6 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </TabContext>
-        <ToastContainer />
       </Container>
     </S.Section>
   );

@@ -37,6 +37,15 @@ export const Status = styled.div`
       transparent 10px
     );
   }
+  &.in-progress {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(29, 135, 26, 0.2),
+      rgba(29, 135, 26, 0.2) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
 `;
 
 export const RightWrapper = styled.div`

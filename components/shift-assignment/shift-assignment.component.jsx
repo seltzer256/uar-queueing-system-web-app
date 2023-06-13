@@ -10,6 +10,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import CustomInput from "../custom-input/custom-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { validateDocId } from "../../lib/utils";
+import socket from "../../lib/socket";
+import { toast } from "react-toastify";
 
 const ShiftAssignment = () => {
   const methods = useForm({
@@ -42,11 +44,22 @@ const ShiftAssignment = () => {
       return;
     }
     setLoading(true);
+
+    const selectedUser = selectedModule?.user?.find(
+      (el) => el._id === data.moduleUser
+    );
+
+    if (!selectedUser?.isAvailable) {
+      toast.error("No disponible");
+      setLoading(false);
+      return;
+    }
     // console.log("data :>> ", data);
     const res = await placeShift(data);
     // console.log("res :>> ", res);
     if (res?.status === "success") {
       // reset();
+      toast.success("Turno creado correctamente");
       setValue("clientId", "");
       setIsOpenDialog(false);
       setLoading(false);
@@ -57,6 +70,17 @@ const ShiftAssignment = () => {
 
   useEffect(() => {
     handleGetServices();
+    socket.connect();
+
+    socket.on("changeAvailability", () => {
+      // console.log("data :>> ", data);
+      handleGetServices();
+    });
+
+    return () => {
+      socket.off("changeAvailability");
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -71,7 +95,7 @@ const ShiftAssignment = () => {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} id="shift-assignment-form">
         <S.Section img="/assets/images/shift-assignment.jpg">
-          <Container maxWidth={"xl"}>
+          <Container maxWidth={"xl"} sx={{ alignItems: "flex-start" }}>
             <S.ImageWrapper href="/">
               <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
             </S.ImageWrapper>

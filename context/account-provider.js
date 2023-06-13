@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { getMe, signIn, signUp, updateMe } from "../lib/uar-api-utils";
 import { destroyCookie } from "nookies";
 import { useEffect } from "react";
-
+import { useRouter } from "next/router";
 export const AccountContext = React.createContext();
 
 const AccountProvider = (props) => {
+  const router = useRouter();
   const [isAccountLoading, setIsAccountLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   const isLoggedIn = !!userData;
@@ -22,6 +23,7 @@ const AccountProvider = (props) => {
       destroyCookie(undefined, "jwt", {
         path: "/",
       });
+      router.push("/login");
       return;
     }
     setUserData({ ...data?.data?.users });

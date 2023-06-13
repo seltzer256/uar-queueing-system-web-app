@@ -5,6 +5,7 @@ import QueueViewItem from "../../components/queue-view-item/queue-view-item.comp
 import dynamic from "next/dynamic";
 import CustomImage from "../../components/custom-image/custom-image.component";
 import { getAllShifts } from "../../lib/uar-api-utils";
+import socket from "../../lib/socket";
 
 const QueueView = ({ bgImage }) => {
   const [shifts, setShifts] = useState([]);
@@ -12,13 +13,28 @@ const QueueView = ({ bgImage }) => {
   // console.log("title :>> ", title);
 
   const handleGetShifts = async () => {
-    const res = await getAllShifts("/?state=on-hold");
+    const res = await getAllShifts("/today");
     console.log("res :>> ", res);
     setShifts(res?.data);
   };
 
   useEffect(() => {
     handleGetShifts();
+    socket.connect();
+
+    socket.on("shiftCreated", (data) => {
+      handleGetShifts();
+      console.log("data :>> ", data);
+    });
+
+    socket.on("shiftUpdated", (data) => {
+      handleGetShifts();
+      console.log("data :>> ", data);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -28,36 +44,34 @@ const QueueView = ({ bgImage }) => {
           <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
         </S.ImageWrapper>
         <Grid container spacing={8}>
-          <Grid item xs={12} md={6}>
-            <Grid container spacing={3}>
-              {shifts.map((shift) => (
-                <Grid item xs={12} key={shift._id}>
-                  <QueueViewItem
-                    code={shift.code}
-                    module={shift.module._id.name}
-                    status={shift.state}
-                  />
-                </Grid>
-              ))}
-              {/* <Grid item xs={12}>
-                <QueueViewItem />
+          {shifts.length > 0 && (
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={3}>
+                {shifts.map((shift) => (
+                  <Grid item xs={12} key={shift._id}>
+                    <QueueViewItem
+                      code={shift.code}
+                      module={shift.module._id.name}
+                      status={shift.state}
+                    />
+                  </Grid>
+                ))}
               </Grid>
-              <Grid item xs={12}>
-                <QueueViewItem />
-              </Grid>
-              <Grid item xs={12}>
-                <QueueViewItem />
-              </Grid> */}
             </Grid>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          )}
+          <Grid
+            item
+            xs={12}
+            md={shifts.length > 0 ? 6 : 12}
+            className="right-wrapper"
+          >
             <S.RightWrapper>
               {/* <S.Subtitle>Turno</S.Subtitle> */}
               <S.StyledBox>
                 <S.ShiftTitle>{currentShift?.code}</S.ShiftTitle>
                 <S.Module>{currentShift?.module._id.name}</S.Module>
               </S.StyledBox>
-              <DynamicClock />
+              <DynamicClock hideBorder={shifts.length === 0} />
             </S.RightWrapper>
           </Grid>
         </Grid>

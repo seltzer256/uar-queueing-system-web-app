@@ -3,7 +3,7 @@ import * as S from "./queue-clock.styles";
 import dayjs from "dayjs";
 import Clock from "react-clock";
 
-const QueueClock = () => {
+const QueueClock = ({ hideBorder }) => {
   dayjs.locale("es");
   const timeInterval = 1000;
   const [leftTime, setLeftTime] = useState(155000);
@@ -25,7 +25,7 @@ const QueueClock = () => {
   }, []);
 
   return (
-    <S.ClockWrapper>
+    <S.ClockWrapper style={{ border: hideBorder ? "none" : "" }}>
       {leftTime > 0 && (
         <S.Time style={{ textTransform: "none" }}>
           Tiempo de expera aprox. {dayjs(leftTime).format("mm")} min

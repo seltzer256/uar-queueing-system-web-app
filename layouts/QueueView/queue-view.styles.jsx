@@ -13,6 +13,9 @@ export const Section = styled(CustomBgImage)`
   > .MuiContainer-root {
     position: relative;
   }
+  .right-wrapper {
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 export const ImageWrapper = styled(CustomLink)`
@@ -50,6 +53,7 @@ export const RightWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  transition: all 1.3s ease-in-out;
 `;
 
 export const StyledBox = styled.div`

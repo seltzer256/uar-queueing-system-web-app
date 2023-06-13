@@ -12,6 +12,8 @@ import SEO from "../seo/seo.component";
 import Footer from "../footer/footer.component";
 import Header from "../header/header.component";
 import { AppContainer } from "../../styles/app.styles";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = ({
   seo,
@@ -40,6 +42,7 @@ const Layout = ({
         {children}
       </AppContainer>
       {!hideFooter && <Footer />}
+      <ToastContainer />
     </>
   );
 };
