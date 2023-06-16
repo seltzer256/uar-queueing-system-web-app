@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import CustomInput from "../../components/custom-input/custom-input.component";
 import * as S from "./register.styles";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import { emailRegexExpression } from "../../lib/utils";
+import { emailRegex } from "../../lib/utils";
 import CustomButton from "../../components/custom-button/custom-button.component";
 // import { Checkbox } from "@mui/material";
 import AuthWrapper from "../auth-wrapper/auth-wrapper.component";
@@ -48,7 +48,7 @@ const Register = () => {
           <CustomInput
             validations={{
               required: true,
-              pattern: emailRegexExpression,
+              pattern: emailRegex,
             }}
             name="email"
             autoComplete="email"

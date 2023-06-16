@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import CustomInput from "../custom-input/custom-input.component";
 import * as S from "./login.styles";
 import { FormProvider, useForm } from "react-hook-form";
-import { emailRegexExpression } from "../../lib/utils";
+import { emailRegex } from "../../lib/utils";
 import CustomButton from "../custom-button/custom-button.component";
 import { AccountContext } from "../../context/account-provider";
 import { useRouter } from "next/router";
@@ -46,7 +46,7 @@ const Login = () => {
             <CustomInput
               validations={{
                 required: true,
-                pattern: emailRegexExpression,
+                pattern: emailRegex,
               }}
               name="email"
               autoComplete="email"

@@ -9,11 +9,11 @@ import { useRouter } from "next/router.js";
 
 const Header = ({ hideLogin, hideRegister, staticNav }) => {
   const router = useRouter();
-  const { isLoggedIn, handleLogout, isAvailable, updateUser } =
+  const { isLoggedIn, handleLogout, isAvailable, updateUser, avatar } =
     useContext(AccountContext);
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 100,
+    threshold: 50,
   });
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -49,10 +49,7 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
           {isLoggedIn ? (
             <div>
               <S.AccountWrapper onClick={handleOpenAccMenu}>
-                <S.AccountAvatar
-                  img="/assets/avatars/avatar_1.png"
-                  alt="avatar"
-                />
+                <S.AccountAvatar img={avatar} alt="avatar" />
                 <ArrowDropDownIcon />
               </S.AccountWrapper>
               <S.AccountMenu

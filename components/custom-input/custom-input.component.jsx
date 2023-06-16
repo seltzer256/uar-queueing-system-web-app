@@ -5,6 +5,7 @@ import { getRHFErrorMessage } from "../../lib/utils";
 import { useState } from "react";
 import { IconButton, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const CustomInput = ({
   title,
@@ -17,6 +18,7 @@ const CustomInput = ({
   multiline,
   defaultValue = "",
   hideShowPass,
+  hideVisibility,
   ...otherProps
 }) => {
   const isPassword = type === "password";
@@ -46,12 +48,16 @@ const CustomInput = ({
             type={!isPassword ? type : visibility ? "text" : "password"}
             multiline={multiline}
             InputProps={
-              isPassword && !hideShowPass
+              isPassword && !hideVisibility
                 ? {
                     endAdornment: (
                       <InputAdornment position="start">
                         <IconButton onClick={() => setVisibility(!visibility)}>
-                          <VisibilityIcon />
+                          {visibility ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),

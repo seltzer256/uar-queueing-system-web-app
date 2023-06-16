@@ -7,7 +7,7 @@ const ProfilePage = () => {
     <Layout
       belongsToForum
       seo={{
-        title: "Post Page",
+        title: "Perfil de usuario",
       }}
     >
       <UserProfile />

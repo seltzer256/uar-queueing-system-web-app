@@ -11,6 +11,7 @@ const AccountProvider = (props) => {
   const [userData, setUserData] = useState(null);
   const isLoggedIn = !!userData;
   const isAvailable = userData?.isAvailable;
+  const avatar = userData?.photo ?? "/assets/avatars/avatar_1.png";
 
   // console.log("userData :>> ", userData);
   const getUserData = async () => {
@@ -82,7 +83,9 @@ const AccountProvider = (props) => {
         userData,
         updateUser: handleChangeUserData,
         isAccountLoading,
+        setIsAccountLoading,
         isAvailable,
+        avatar,
       }}
     >
       {props.children}
