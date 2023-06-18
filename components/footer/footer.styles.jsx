@@ -4,7 +4,7 @@ import { Container, IconButton, Typography } from "@mui/material";
 export const Footer = styled.footer`
   color: white;
   padding: 3rem 0;
-  background-color: ${({ theme }) => theme.palette.primary.dark};
+  background-color: ${({ theme }) => theme.palette.primary.main};
 `;
 
 export const Wrapper = styled(Container)`

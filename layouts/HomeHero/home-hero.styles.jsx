@@ -65,7 +65,7 @@ export const StyledImage = styled(CustomImage)`
 `;
 
 export const BgFilter = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.23); */
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
   z-index: 2;
