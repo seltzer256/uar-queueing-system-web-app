@@ -24,7 +24,10 @@ const AccountProvider = (props) => {
       destroyCookie(undefined, "jwt", {
         path: "/",
       });
-      router.push("/login");
+      if (router.pathname === "/dashboard") {
+        router.push("/login");
+        return;
+      }
       return;
     }
     setUserData({ ...data?.data?.users });
