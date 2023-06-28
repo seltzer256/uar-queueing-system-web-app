@@ -23,6 +23,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { toast } from "react-toastify";
 import ControlledWysiwyg from "../../components/controlled-wysiwyg/controlled-wysiwyg.component";
 import parse from "html-react-parser";
+import { textEllipsis } from "../../lib/utils";
 
 const ServicesTab = () => {
   const methods = useForm({
@@ -96,11 +97,11 @@ const ServicesTab = () => {
   return (
     <S.Wrapper>
       <S.TableWrapper>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
-              <TableCell>Descripcion</TableCell>
+              {/* <TableCell>Descripcion</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -111,16 +112,14 @@ const ServicesTab = () => {
                 onClick={() => handleSelectedService(row)}
                 className={selectedService?._id === row._id ? "selected" : ""}
               >
-                <TableCell component="th" scope="row">
-                  {row.name}
+                <TableCell scope="row">{row.name}</TableCell>
+                <TableCell>
+                  {/* {row.description && (
+                  <S.DescriptionWrapper>
+                    {parse(textEllipsis(row.description, 50))}
+                  </S.DescriptionWrapper>
+                  )} */}
                 </TableCell>
-                {row.description && (
-                  <TableCell>
-                    <S.DescriptionWrapper>
-                      {parse(row.description)}
-                    </S.DescriptionWrapper>
-                  </TableCell>
-                )}
               </S.BodyRow>
             ))}
           </TableBody>

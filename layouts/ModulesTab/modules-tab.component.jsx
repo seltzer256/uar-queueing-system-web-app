@@ -37,6 +37,7 @@ const ModulesTab = () => {
       code: "",
       active: true,
       authRequired: false,
+      enableChoose: false,
     },
   });
   const [selectedModule, setSelectedModule] = useState(null);
@@ -138,8 +139,8 @@ const ModulesTab = () => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell>{row.code}</TableCell>
-                <TableCell>
+                <TableCell component="th">{row.code}</TableCell>
+                <TableCell component="th">
                   {row.user.map((user, index) => (
                     <React.Fragment key={user._id}>
                       {user.name}
@@ -147,7 +148,7 @@ const ModulesTab = () => {
                     </React.Fragment>
                   ))}
                 </TableCell>
-                <TableCell>{row.service?.name}</TableCell>
+                <TableCell component="th">{row.service?.name}</TableCell>
               </S.BodyRow>
             ))}
           </TableBody>
@@ -235,6 +236,21 @@ const ModulesTab = () => {
                     <S.StyledControlLabel
                       control={<Checkbox checked={value} onChange={onChange} />}
                       label="Requiere autenticación"
+                    />
+                  )}
+                />
+              </S.CheckboxWrapper>
+            </Grid>
+            <Grid item xs={4}>
+              <S.CheckboxWrapper>
+                <Controller
+                  name="enableChoose"
+                  control={control}
+                  // defaultValue={false}
+                  render={({ field: { value, onChange } }) => (
+                    <S.StyledControlLabel
+                      control={<Checkbox checked={value} onChange={onChange} />}
+                      label="Habilitar escoger"
                     />
                   )}
                 />
