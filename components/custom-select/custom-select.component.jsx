@@ -17,6 +17,7 @@ const CustomSelect = ({
   onChange,
   placeholder,
   multiple,
+  value,
   ...otherProps
 }) => {
   const { control } = useFormContext() ?? { formState: { errors: {} } };
@@ -31,33 +32,31 @@ const CustomSelect = ({
 
   if (!control) {
     return (
-      <RhfErrorHandler name={name} rules={rules}>
-        <S.StyledFormControl fullWidth {...otherProps}>
-          {label && <S.StyledLabel>{label}</S.StyledLabel>}
-          <S.StyledSelect
-            IconComponent={ArrowBottom}
-            onChange={(evt) => handleChange(evt)}
-            defaultValue={defaultValue ? defaultValue : placeholder && ""}
-          >
-            {placeholder && <option value="" disabled />}
-            {isArray
-              ? items.map((item, index) => (
-                  <option value={item[valueKey]} key={`menu-${index}`}>
-                    {item[titleKey]}
-                  </option>
-                ))
-              : Object.keys(items).map((key, index) => (
-                  <option
-                    value={items[key][valueKey] ? items[key][valueKey] : key}
-                    key={`menu-${index}`}
-                  >
-                    {items[key][titleKey] ? items[key][titleKey] : items[key]}
-                  </option>
-                ))}
-          </S.StyledSelect>
-          <FormHelperText>Without label</FormHelperText>
-        </S.StyledFormControl>
-      </RhfErrorHandler>
+      <S.StyledFormControl fullWidth {...otherProps}>
+        {label && <S.StyledLabel>{label}</S.StyledLabel>}
+        <S.StyledSelect
+          IconComponent={ArrowBottom}
+          onChange={(evt) => handleChange(evt)}
+          defaultValue={defaultValue ? defaultValue : placeholder && ""}
+          value={value}
+        >
+          {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
+          {isArray
+            ? items.map((item, index) => (
+                <MenuItem value={item[valueKey]} key={`menu-${index}`}>
+                  {item[titleKey]}
+                </MenuItem>
+              ))
+            : Object.keys(items).map((key, index) => (
+                <MenuItem
+                  value={items[key][valueKey] ? items[key][valueKey] : key}
+                  key={`menu-${index}`}
+                >
+                  {items[key][titleKey] ? items[key][titleKey] : items[key]}
+                </MenuItem>
+              ))}
+        </S.StyledSelect>
+      </S.StyledFormControl>
     );
   }
 

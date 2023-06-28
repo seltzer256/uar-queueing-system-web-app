@@ -8,10 +8,11 @@ import ModulesTab from "../ModulesTab/modules-tab.component";
 import ServicesTab from "../ServicesTab/services-tab.component";
 import ShiftsTab from "../ShiftsTab/shifts-tab.component";
 import Spinner from "../../components/spinner/spinner.component";
+import AdminDashboard from "../../components/admin-dashboard/admin-dashboard.component";
 
 const Dashboard = () => {
   const { isAccountLoading } = useContext(AccountContext);
-  const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.MODULES.value);
+  const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.DASHBOARD.value);
 
   const handleChange = (_, newValue) => {
     setTabValue(newValue);
@@ -43,6 +44,9 @@ const Dashboard = () => {
                   <Spinner />
                 ) : (
                   <>
+                    <S.StyledTabPanel value={SIDEBAR_ITEMS.DASHBOARD.value}>
+                      <AdminDashboard />
+                    </S.StyledTabPanel>
                     <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
                       <ModulesTab />
                     </S.StyledTabPanel>
