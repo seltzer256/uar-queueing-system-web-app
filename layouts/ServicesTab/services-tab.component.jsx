@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./services-tab.styles";
 import {
+  Checkbox,
   Grid,
   IconButton,
   Table,
@@ -15,7 +16,7 @@ import {
   updateService,
   createService,
 } from "../../lib/uar-api-utils";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import CustomInput from "../../components/custom-input/custom-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -31,13 +32,15 @@ const ServicesTab = () => {
     reValidateMode: "onBlur",
     defaultValues: {
       name: "",
+      code: "",
       description: "",
+      active: true,
     },
   });
   const [selectedService, setSelectedService] = useState(null);
   const [services, setServices] = useState([]);
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, control } = methods;
 
   const handleGetServices = async () => {
     const res = await getServices();
@@ -144,12 +147,27 @@ const ServicesTab = () => {
                 validations={{ required: true }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <CustomInput
                 name={"code"}
                 label={"Código"}
                 validations={{ required: true }}
               />
+            </Grid>
+            <Grid item xs={6}>
+              <S.CheckboxWrapper>
+                <Controller
+                  name="active"
+                  control={control}
+                  // defaultValue={true}
+                  render={({ field: { value, onChange } }) => (
+                    <S.StyledControlLabel
+                      control={<Checkbox checked={value} onChange={onChange} />}
+                      label="Activo"
+                    />
+                  )}
+                />
+              </S.CheckboxWrapper>
             </Grid>
             <Grid item xs={12}>
               <ControlledWysiwyg
