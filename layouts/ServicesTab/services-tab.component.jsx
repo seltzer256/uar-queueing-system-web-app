@@ -23,8 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { toast } from "react-toastify";
 import ControlledWysiwyg from "../../components/controlled-wysiwyg/controlled-wysiwyg.component";
-import parse from "html-react-parser";
-import { textEllipsis } from "../../lib/utils";
+import CheckIcon from "@mui/icons-material/Check";
 
 const ServicesTab = () => {
   const methods = useForm({
@@ -105,6 +104,7 @@ const ServicesTab = () => {
             <TableRow>
               <TableCell>Nombre</TableCell>
               <TableCell>Código</TableCell>
+              <TableCell>Activo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -117,6 +117,7 @@ const ServicesTab = () => {
               >
                 <TableCell scope="row">{row.name}</TableCell>
                 <TableCell>{row.code}</TableCell>
+                <TableCell>{row.active && <CheckIcon />}</TableCell>
               </S.BodyRow>
             ))}
           </TableBody>
