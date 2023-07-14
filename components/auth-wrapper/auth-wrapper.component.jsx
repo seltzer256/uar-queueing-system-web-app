@@ -19,7 +19,7 @@ const AuthWrapper = ({ children }) => {
       />
       <S.Card>
         <S.StyledBox>
-          <S.Title>Sistema de Colas - UAR</S.Title>
+          <S.Title>Sistema de Turnos - UAR</S.Title>
           <S.Subtitle>{phrase}</S.Subtitle>
           {children}
         </S.StyledBox>

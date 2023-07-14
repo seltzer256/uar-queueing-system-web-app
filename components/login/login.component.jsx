@@ -67,7 +67,9 @@ const Login = () => {
               Ingresar
             </CustomButton>
           </S.StyledBox>
-          <S.ForgotPassword>Olvidó su contraseña?</S.ForgotPassword>
+          <S.ForgotPassword url="/forgot-password">
+            Olvidó su contraseña?
+          </S.ForgotPassword>
         </AuthWrapper>
       </S.StyledForm>
     </FormProvider>

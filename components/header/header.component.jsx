@@ -9,8 +9,14 @@ import { useRouter } from "next/router.js";
 
 const Header = ({ hideLogin, hideRegister, staticNav }) => {
   const router = useRouter();
-  const { isLoggedIn, handleLogout, isAvailable, updateUser, avatar } =
-    useContext(AccountContext);
+  const {
+    isLoggedIn,
+    handleLogout,
+    isAvailable,
+    updateUser,
+    avatar,
+    userData,
+  } = useContext(AccountContext);
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 50,
@@ -58,7 +64,7 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
                 onClose={handleCloseAccMenu}
               >
                 <S.AccountBox onClick={() => router.push("/perfil")}>
-                  <S.AccountName>John Doe</S.AccountName>
+                  <S.AccountName>{userData?.name}</S.AccountName>
                 </S.AccountBox>
                 <S.AccountBox onClick={handleChangeAvailable}>
                   <S.AccountName>Disponible</S.AccountName>
