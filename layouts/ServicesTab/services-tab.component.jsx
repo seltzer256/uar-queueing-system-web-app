@@ -101,7 +101,7 @@ const ServicesTab = () => {
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
-              {/* <TableCell>Descripcion</TableCell> */}
+              <TableCell>Código</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -113,13 +113,7 @@ const ServicesTab = () => {
                 className={selectedService?._id === row._id ? "selected" : ""}
               >
                 <TableCell scope="row">{row.name}</TableCell>
-                <TableCell>
-                  {/* {row.description && (
-                  <S.DescriptionWrapper>
-                    {parse(textEllipsis(row.description, 50))}
-                  </S.DescriptionWrapper>
-                  )} */}
-                </TableCell>
+                <TableCell>{row.code}</TableCell>
               </S.BodyRow>
             ))}
           </TableBody>
@@ -147,6 +141,13 @@ const ServicesTab = () => {
               <CustomInput
                 name={"name"}
                 label={"Nombre"}
+                validations={{ required: true }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <CustomInput
+                name={"code"}
+                label={"Código"}
                 validations={{ required: true }}
               />
             </Grid>
