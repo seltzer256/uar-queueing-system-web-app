@@ -66,19 +66,3 @@ export const DescriptionWrapper = styled.div`
     margin: 0;
   } */
 `;
-
-export const CheckboxWrapper = styled.div`
-  margin-left: 0.75rem;
-`;
-
-export const StyledControlLabel = styled(FormControlLabel)`
-  svg {
-    color: #1c1c1c;
-  }
-  &.MuiFormControlLabel-root {
-    align-items: center;
-  }
-  .MuiFormControlLabel-label {
-    margin-top: 2px;
-  }
-`;

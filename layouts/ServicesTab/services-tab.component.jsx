@@ -24,6 +24,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { toast } from "react-toastify";
 import ControlledWysiwyg from "../../components/controlled-wysiwyg/controlled-wysiwyg.component";
 import CheckIcon from "@mui/icons-material/Check";
+import CustomCheckbox from "../../components/custom-checkbox/custom-checkbox.component";
 
 const ServicesTab = () => {
   const methods = useForm({
@@ -34,6 +35,8 @@ const ServicesTab = () => {
       code: "",
       description: "",
       active: true,
+      authRequired: false,
+      chooseRequired: false,
     },
   });
   const [selectedService, setSelectedService] = useState(null);
@@ -141,34 +144,31 @@ const ServicesTab = () => {
       <FormProvider {...methods}>
         <S.StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={8}>
               <CustomInput
                 name={"name"}
                 label={"Nombre"}
                 validations={{ required: true }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <CustomInput
                 name={"code"}
                 label={"Código"}
                 validations={{ required: true }}
               />
             </Grid>
-            <Grid item xs={6}>
-              <S.CheckboxWrapper>
-                <Controller
-                  name="active"
-                  control={control}
-                  // defaultValue={true}
-                  render={({ field: { value, onChange } }) => (
-                    <S.StyledControlLabel
-                      control={<Checkbox checked={value} onChange={onChange} />}
-                      label="Activo"
-                    />
-                  )}
-                />
-              </S.CheckboxWrapper>
+            <Grid item xs={4}>
+              <CustomCheckbox name="active" label="Activo" />
+            </Grid>
+            <Grid item xs={4}>
+              <CustomCheckbox
+                name="authRequired"
+                label="Requiere autenticación"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <CustomCheckbox name="chooseRequired" label="Requiere escoger" />
             </Grid>
             <Grid item xs={12}>
               <ControlledWysiwyg
