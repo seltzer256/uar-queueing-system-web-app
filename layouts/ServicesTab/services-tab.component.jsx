@@ -52,7 +52,7 @@ const ServicesTab = () => {
 
   const handleAddNew = () => {
     setSelectedService(null);
-    reset({ name: "", description: "" });
+    reset();
   };
 
   const handleSelectedService = (service) => {
@@ -90,7 +90,7 @@ const ServicesTab = () => {
       // console.log("res :>> ", res);
       toast.success("Servicio eliminado correctamente");
       setSelectedService(null);
-      reset({ name: "", description: "" });
+      reset();
       handleGetServices();
     }
   };

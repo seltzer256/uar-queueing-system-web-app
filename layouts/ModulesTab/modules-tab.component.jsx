@@ -31,8 +31,8 @@ const ModulesTab = () => {
     mode: "onBlur",
     reValidateMode: "onBlur",
     defaultValues: {
-      service: "",
-      user: [],
+      services: [],
+      user: "",
       name: "",
       code: "",
       active: true,
@@ -45,6 +45,7 @@ const ModulesTab = () => {
   const [services, setServices] = useState([]);
   const [users, setUsers] = useState([]);
 
+  // console.log("selectedModule :>> ", selectedModule);
   const { handleSubmit, reset, control } = methods;
   // console.log("modules :>> ", modules);
 
@@ -68,17 +69,19 @@ const ModulesTab = () => {
 
   const handleAddNew = () => {
     setSelectedModule(null);
-    reset({ service: "", user: [], name: "", code: "" });
+    reset({ services: [], user: "", name: "", code: "" });
   };
 
   const handleSelectedModule = (module, justCreated) => {
     setSelectedModule(module);
-    const userIds = module.user.map((user) => (justCreated ? user : user._id));
-    // console.log("userIds :>> ", userIds);
+    const serviceIds = module?.services?.map((service) =>
+      justCreated ? service : service?._id
+    );
+    // console.log("serviceIds :>> ", serviceIds);
     reset({
       ...module,
-      service: justCreated ? module.service : module.service._id,
-      user: userIds,
+      services: serviceIds,
+      user: justCreated ? module.user : module.user._id,
     });
   };
 
@@ -105,7 +108,7 @@ const ModulesTab = () => {
       // console.log("res :>> ", res);
       toast.success("Módulo eliminado correctamente");
       setSelectedModule(null);
-      reset({ service: "", user: [], name: "", code: "" });
+      reset({ services: [], user: "", name: "", code: "" });
       handleGetModules();
     }
   };
@@ -124,8 +127,8 @@ const ModulesTab = () => {
             <TableRow>
               <TableCell>Nombre</TableCell>
               <TableCell>Código</TableCell>
-              <TableCell>Usuarios</TableCell>
-              <TableCell>Servicio</TableCell>
+              <TableCell>Usuario</TableCell>
+              <TableCell>Servicios</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -140,15 +143,15 @@ const ModulesTab = () => {
                   {row.name}
                 </TableCell>
                 <TableCell component="th">{row.code}</TableCell>
-                <TableCell component="th">
-                  {row.user.map((user, index) => (
-                    <React.Fragment key={user._id}>
-                      {user.name}
-                      {index < row.user.length - 1 ? ", " : ""}
+                <TableCell component="th">{row.user?.name}</TableCell>
+                <TableCell component="th" sx={{ maxWidth: "300px" }}>
+                  {row.services.map((service, index) => (
+                    <React.Fragment key={service._id}>
+                      {service.name}
+                      {index < row.services.length - 1 ? ", " : ""}
                     </React.Fragment>
                   ))}
                 </TableCell>
-                <TableCell component="th">{row.service?.name}</TableCell>
               </S.BodyRow>
             ))}
           </TableBody>
@@ -188,27 +191,25 @@ const ModulesTab = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomSelect
-                name={"service"}
-                label={"Servicio"}
+                name={"services"}
+                label={"Servicio(s)"}
                 rules={{ required: true }}
                 items={services}
                 titleKey="name"
                 valueKey="_id"
-                placeholder="Seleccione un servicio"
-                // isArray
+                multiple
+                placeholder="Seleccione uno o más servicios"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomSelect
                 name={"user"}
-                label={"Usuario(s)"}
+                label={"Usuario"}
                 rules={{ required: true }}
                 items={users}
                 titleKey="name"
                 valueKey="_id"
-                multiple
-                placeholder="Seleccione uno o más usuarios"
-                // isArray
+                placeholder="Seleccione un usuario"
               />
             </Grid>
             <Grid item xs={4}>
@@ -221,36 +222,6 @@ const ModulesTab = () => {
                     <S.StyledControlLabel
                       control={<Checkbox checked={value} onChange={onChange} />}
                       label="Activo"
-                    />
-                  )}
-                />
-              </S.CheckboxWrapper>
-            </Grid>
-            <Grid item xs={4}>
-              <S.CheckboxWrapper>
-                <Controller
-                  name="authRequired"
-                  control={control}
-                  // defaultValue={false}
-                  render={({ field: { value, onChange } }) => (
-                    <S.StyledControlLabel
-                      control={<Checkbox checked={value} onChange={onChange} />}
-                      label="Requiere autenticación"
-                    />
-                  )}
-                />
-              </S.CheckboxWrapper>
-            </Grid>
-            <Grid item xs={4}>
-              <S.CheckboxWrapper>
-                <Controller
-                  name="enableChoose"
-                  control={control}
-                  // defaultValue={false}
-                  render={({ field: { value, onChange } }) => (
-                    <S.StyledControlLabel
-                      control={<Checkbox checked={value} onChange={onChange} />}
-                      label="Habilitar escoger"
                     />
                   )}
                 />
