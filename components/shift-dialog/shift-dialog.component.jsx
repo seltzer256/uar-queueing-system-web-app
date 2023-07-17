@@ -3,9 +3,10 @@ import * as S from "./shift-dialog.styles";
 import CustomInput from "../custom-input/custom-input.component";
 import { emailRegex } from "../../lib/utils";
 import CustomButton from "../custom-button/custom-button.component";
-import { Collapse, Typography } from "@mui/material";
+import { Collapse, Stack, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useReactToPrint } from "react-to-print";
+import { useFormContext } from "react-hook-form";
 
 const ShiftDialog = ({
   isOpen,
@@ -14,6 +15,7 @@ const ShiftDialog = ({
   shiftCreated,
   setShiftCreated,
 }) => {
+  const { watch } = useFormContext();
   const ticketRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => ticketRef.current,
@@ -24,7 +26,7 @@ const ShiftDialog = ({
   };
 
   useEffect(() => {
-    if (shiftCreated) {
+    if (shiftCreated && watch("printTicket")) {
       handlePrint();
     }
   }, [shiftCreated]);
@@ -37,7 +39,7 @@ const ShiftDialog = ({
         </S.CloseBtn>
         <Collapse in={!!!shiftCreated}>
           {authRequired && (
-            <>
+            <Stack spacing={2}>
               <S.Title>Ingrese su nombre:</S.Title>
               <CustomInput
                 name="clientName"
@@ -58,7 +60,7 @@ const ShiftDialog = ({
                   pattern: emailRegex,
                 }}
               />
-            </>
+            </Stack>
           )}
           <S.StyledCheckbox
             name="printTicket"
@@ -87,6 +89,9 @@ const ShiftDialog = ({
           <S.TicketWrapper ref={ticketRef}>
             <S.Title>Ticket</S.Title>
             <S.TicketCode>{shiftCreated?.code}</S.TicketCode>
+            <S.Service>
+              {shiftCreated?.service?.name} - {shiftCreated?.service?.code}
+            </S.Service>
             <Typography>Clientes en espera: {shiftCreated?.waiting}</Typography>
           </S.TicketWrapper>
         </Collapse>

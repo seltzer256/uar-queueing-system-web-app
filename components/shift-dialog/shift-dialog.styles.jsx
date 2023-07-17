@@ -64,3 +64,10 @@ export const TicketCode = styled(Typography)`
   line-height: 4rem;
   font-weight: 700;
 `;
+
+export const Service = styled(Typography)`
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 500;
+  text-align: center;
+`;
