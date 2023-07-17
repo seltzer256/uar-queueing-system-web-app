@@ -12,21 +12,21 @@ import { AccountContext } from "../../context/account-provider";
 const ShiftsTab = () => {
   const { userData } = useContext(AccountContext);
   const [shifts, setShifts] = useState([]);
-  const pendingShifts = shifts.filter(
+  const pendingShifts = shifts?.filter(
     ({ state }) => state === SHIFT_STATUS.ON_HOLD
   );
-  const completedShifts = shifts.filter(
+  const completedShifts = shifts?.filter(
     ({ state }) =>
       state === SHIFT_STATUS.CANCELLED || state === SHIFT_STATUS.COMPLETED
   );
-  const currentShift = shifts.find(
+  const currentShift = shifts?.find(
     ({ state }) => state === SHIFT_STATUS.IN_PROGRESS
   );
 
   // console.log("completedShifts :>> ", completedShifts);
   const handleGetShifts = async () => {
     const res = await getShiftsByUser();
-    // console.log("res :>> ", res);
+    console.log("res :>> ", res);
     setShifts(res?.shifts);
   };
 
@@ -81,7 +81,7 @@ const ShiftsTab = () => {
                     <S.QueueItem
                       key={`pending-shift-${index}`}
                       code={shift.code}
-                      module={shift.module._id.name}
+                      module={shift.currentModule.name}
                       // status={shift.state}
                     />
                   ))}

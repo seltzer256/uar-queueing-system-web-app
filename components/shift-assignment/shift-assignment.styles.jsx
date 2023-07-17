@@ -92,7 +92,7 @@ export const StyledOptionGroup = styled(FormControl)`
 
 export const DialogForm = styled.div`
   padding: 2.5rem 1.75rem;
-  width: 350px;
+  width: 550px;
 `;
 
 export const DialogTitle = styled(Typography)`

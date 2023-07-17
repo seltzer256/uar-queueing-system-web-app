@@ -8,7 +8,7 @@ const ModuleOptions = ({ users = [] }) => {
 
   useEffect(() => {
     if (users[0]?.isAvailable) {
-      setValue("moduleUser", users[0]?._id);
+      setValue("userId", users[0]?._id);
     }
   }, [users]);
 
@@ -19,7 +19,7 @@ const ModuleOptions = ({ users = [] }) => {
     <>
       <S.Title>{users.length > 1 ? "Encargados:" : "Encargado:"}</S.Title>
       <Controller
-        name="moduleUser"
+        name="userId"
         defaultValue={users[0]?._id}
         control={control}
         rules={{ required: true }}

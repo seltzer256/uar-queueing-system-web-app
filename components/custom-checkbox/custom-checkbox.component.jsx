@@ -3,10 +3,10 @@ import * as S from "./custom-checkbox.styles";
 import { Controller, useFormContext } from "react-hook-form";
 import { Checkbox } from "@mui/material";
 
-const CustomCheckbox = ({ name, label }) => {
+const CustomCheckbox = ({ name, label, ...others }) => {
   const { control } = useFormContext();
   return (
-    <S.Wrapper>
+    <S.Wrapper {...others}>
       <Controller
         name={name}
         control={control}

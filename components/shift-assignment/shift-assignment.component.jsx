@@ -1,67 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as S from "./shift-assignment.styles";
-import { Box, Container, Dialog, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import CustomImage from "../custom-image/custom-image.component";
 import ServiceItem from "../service-item/service-item.component";
 import parse from "html-react-parser";
-import { getActiveModules, placeShift } from "../../lib/uar-api-utils";
+import { getActiveServices, placeShift } from "../../lib/uar-api-utils";
 import ModuleOptions from "../module-options/module-options.component";
 import { FormProvider, useForm } from "react-hook-form";
-import CustomInput from "../custom-input/custom-input.component";
-import CustomButton from "../custom-button/custom-button.component";
-import { validateDocId } from "../../lib/utils";
 import socket from "../../lib/socket";
 import { toast } from "react-toastify";
+import ShiftDialog from "../shift-dialog/shift-dialog.component";
 
 const ShiftAssignment = () => {
   const methods = useForm({
     mode: "onBlur",
     reValidateMode: "onBlur",
+    defaultValues: {
+      printTicket: false,
+    },
   });
   const [serviceIndex, setServiceIndex] = useState(0);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [services, setServices] = useState([]);
+  const [shiftCreated, setShiftCreated] = useState(null);
 
-  const selectedModule = services[serviceIndex];
+  const selectedService = services[serviceIndex];
   const { handleSubmit, setValue } = methods;
 
-  // console.log("selectedModule :>> ", selectedModule);
+  // console.log("selectedService :>> ", selectedService);
   const handleSelected = (index) => {
     // console.log("index :>> ", index);
     setServiceIndex(index);
   };
 
   const handleGetServices = async () => {
-    const res = await getActiveModules();
+    const res = await getActiveServices();
     // console.log("res :>> ", res);
-    setServices(res?.data?.modules);
+    setServices(res?.data?.services);
   };
 
   const onSubmit = async (data) => {
-    if (selectedModule?.authRequired && !isOpenDialog) {
-      setIsOpenDialog(true);
+    // console.log("data :>> ", data);
+    setLoading(true);
+    // setIsOpenDialog(false);
+
+    data.serviceId = selectedService._id;
+
+    let isAvailableService = false;
+    selectedService?.users?.map((user) => {
+      if (user?.isAvailable) {
+        isAvailableService = true;
+      }
+    });
+
+    if (!isAvailableService) {
+      toast.error("Servicio no disponible");
+      setLoading(false);
       return;
     }
-    setLoading(true);
 
-    const selectedUser = selectedModule?.user?.find(
-      (el) => el._id === data.moduleUser
+    const selectedUser = selectedService?.users?.find(
+      (el) => el._id === data.userId
     );
 
-    if (!selectedUser?.isAvailable) {
-      toast.error("No disponible");
+    // console.log("selectedUser :>> ", selectedUser);
+    if (selectedService?.chooseRequired && !selectedUser?.isAvailable) {
+      toast.error("Encargado no disponible");
       setLoading(false);
       return;
     }
     // console.log("data :>> ", data);
-    const res = await placeShift(data);
-    // console.log("res :>> ", res);
-    if (res?.status === "success") {
-      // reset();
+    const shiftRes = await placeShift(data);
+    console.log("shiftRes :>> ", shiftRes);
+    if (shiftRes?.status === "success") {
       toast.success("Turno creado correctamente");
-      setValue("clientId", "");
-      setIsOpenDialog(false);
+      setValue("clientName", "");
+      setValue("clientEmail", "");
+      setShiftCreated(shiftRes.shift);
+      // setIsOpenDialog(false);
       setLoading(false);
       return;
     }
@@ -84,11 +101,16 @@ const ShiftAssignment = () => {
   }, []);
 
   useEffect(() => {
-    setValue("moduleId", selectedModule?._id);
-  }, [selectedModule]);
+    if (selectedService?.chooseRequired) {
+      setValue("userId", selectedService?.users[0]?._id);
+      return;
+    }
+    setValue("userId", "");
+  }, [selectedService]);
 
   useEffect(() => {
-    setValue("clientId", "");
+    setValue("clientName", "");
+    setValue("clientEmail", "");
   }, [isOpenDialog]);
 
   return (
@@ -109,7 +131,7 @@ const ShiftAssignment = () => {
                         <ServiceItem
                           {...el}
                           className={
-                            selectedModule?._id === el._id ? "active" : ""
+                            selectedService?._id === el._id ? "active" : ""
                           }
                           onClick={() => handleSelected(index)}
                         />
@@ -123,13 +145,16 @@ const ShiftAssignment = () => {
                   <Box>
                     <S.Title>Descripción</S.Title>
                     <S.CurrentService>
-                      {parse(
-                        selectedModule?.service.description ?? "Sin descripcion"
+                      {parse(selectedService?.description ?? "Sin descripcion")}
+                      {selectedService?.chooseRequired && (
+                        <ModuleOptions users={selectedService?.users} />
                       )}
-                      <ModuleOptions users={selectedModule?.user} />
                     </S.CurrentService>
                   </Box>
-                  <S.StyledBtn type="submit" loading={loading}>
+                  <S.StyledBtn
+                    loading={loading}
+                    onClick={() => setIsOpenDialog(true)}
+                  >
                     Obtener Ticket
                   </S.StyledBtn>
                 </S.RightWrapper>
@@ -137,33 +162,13 @@ const ShiftAssignment = () => {
             </Grid>
           </Container>
         </S.Section>
-        <Dialog open={isOpenDialog} onClose={() => setIsOpenDialog(false)}>
-          <S.DialogForm>
-            <S.DialogTitle>Ingrese su cédula:</S.DialogTitle>
-            <CustomInput
-              name="clientId"
-              autoComplete="off"
-              label="Cédula"
-              validations={{
-                required: true,
-                validate: (val) => {
-                  if (!validateDocId(val)) {
-                    return "Ingrese una cédula válida";
-                  }
-                },
-              }}
-            />
-            <CustomButton
-              type="submit"
-              fullWidth
-              style={{ marginTop: "1rem" }}
-              form="shift-assignment-form"
-              loading={loading}
-            >
-              Ingresar
-            </CustomButton>
-          </S.DialogForm>
-        </Dialog>
+        <ShiftDialog
+          authRequired={selectedService?.authRequired}
+          isOpen={isOpenDialog}
+          setIsOpen={setIsOpenDialog}
+          shiftCreated={shiftCreated}
+          setShiftCreated={setShiftCreated}
+        />
       </form>
     </FormProvider>
   );
