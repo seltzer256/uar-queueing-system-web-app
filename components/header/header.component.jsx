@@ -21,6 +21,8 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
     disableHysteresis: true,
     threshold: 50,
   });
+
+  // console.log("userData :>> ", userData);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);

@@ -53,13 +53,10 @@ const ShiftsTab = () => {
     socket.connect();
 
     socket.on("shiftCreated", (data) => {
+      // if (userData._id === data) {
       // console.log("data :>> ", data);
-      // console.log("userData :>> ", userData);
-      if (userData._id === data) {
-        // console.log("new shift");
-        // console.log("data :>> ", data);
-        handleGetShifts();
-      }
+      handleGetShifts();
+      // }
     });
 
     return () => {
@@ -124,6 +121,11 @@ const ShiftsTab = () => {
                       code={currentShift.code}
                       module={currentShift.module?.name}
                     />
+                    {currentShift?.client.name && (
+                      <S.ClientName>
+                        Nombre: <span>{currentShift?.client.name}</span>
+                      </S.ClientName>
+                    )}
                   </Grid>
                   <Grid item xs={6}>
                     <S.ButtonsWrapper>

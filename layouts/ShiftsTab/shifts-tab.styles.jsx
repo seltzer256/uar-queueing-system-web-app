@@ -74,3 +74,11 @@ export const ButtonsWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
+
+export const ClientName = styled(Typography)`
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  span {
+    font-weight: 700;
+  }
+`;
