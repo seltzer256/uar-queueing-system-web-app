@@ -51,7 +51,7 @@ const QueueView = ({ bgImage }) => {
                   <Grid item xs={12} key={shift._id}>
                     <QueueViewItem
                       code={shift.code}
-                      module={shift.module._id.name}
+                      module={shift.module?.code}
                       status={shift.state}
                     />
                   </Grid>
@@ -69,7 +69,7 @@ const QueueView = ({ bgImage }) => {
               {/* <S.Subtitle>Turno</S.Subtitle> */}
               <S.StyledBox>
                 <S.ShiftTitle>{currentShift?.code}</S.ShiftTitle>
-                <S.Module>{currentShift?.module._id.name}</S.Module>
+                <S.Module>{currentShift?.module.code}</S.Module>
               </S.StyledBox>
               <DynamicClock hideBorder={shifts.length === 0} />
             </S.RightWrapper>
