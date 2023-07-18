@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import * as S from "./dashboard.styles";
 import { Container, Grid, Tab } from "@mui/material";
 import { SIDEBAR_ITEMS } from "../../lib/constants";
@@ -11,12 +11,18 @@ import Spinner from "../../components/spinner/spinner.component";
 import AdminDashboard from "../../components/admin-dashboard/admin-dashboard.component";
 
 const Dashboard = () => {
-  const { isAccountLoading } = useContext(AccountContext);
-  const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.DASHBOARD.value);
+  const { isAccountLoading, userData } = useContext(AccountContext);
+  const [tabValue, setTabValue] = useState(SIDEBAR_ITEMS.SHIFTS.value);
 
   const handleChange = (_, newValue) => {
     setTabValue(newValue);
   };
+
+  useEffect(() => {
+    if (userData?.role === "admin") {
+      setTabValue(SIDEBAR_ITEMS.DASHBOARD.value);
+    }
+  }, [userData]);
 
   return (
     <S.Section>
@@ -26,15 +32,26 @@ const Dashboard = () => {
             <Grid item xs={12} md={3}>
               <S.StyledTabList onChange={handleChange} orientation="vertical">
                 {Object.values(SIDEBAR_ITEMS).map(
-                  ({ value, name, icon }, index) => (
-                    <Tab
-                      iconPosition="start"
-                      label={name}
-                      value={value}
-                      icon={icon}
-                      key={`tab-btn-${index}`}
-                    />
-                  )
+                  ({ value, name, icon, onlyAdmin }, index) =>
+                    onlyAdmin ? (
+                      userData?.role === "admin" && (
+                        <Tab
+                          iconPosition="start"
+                          label={name}
+                          value={value}
+                          icon={icon}
+                          key={`tab-btn-${index}`}
+                        />
+                      )
+                    ) : (
+                      <Tab
+                        iconPosition="start"
+                        label={name}
+                        value={value}
+                        icon={icon}
+                        key={`tab-btn-${index}`}
+                      />
+                    )
                 )}
               </S.StyledTabList>
             </Grid>
@@ -44,15 +61,19 @@ const Dashboard = () => {
                   <Spinner />
                 ) : (
                   <>
-                    <S.StyledTabPanel value={SIDEBAR_ITEMS.DASHBOARD.value}>
-                      <AdminDashboard />
-                    </S.StyledTabPanel>
-                    <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
-                      <ModulesTab />
-                    </S.StyledTabPanel>
-                    <S.StyledTabPanel value={SIDEBAR_ITEMS.SERVICES.value}>
-                      <ServicesTab />
-                    </S.StyledTabPanel>
+                    {userData?.role === "admin" && (
+                      <>
+                        <S.StyledTabPanel value={SIDEBAR_ITEMS.DASHBOARD.value}>
+                          <AdminDashboard />
+                        </S.StyledTabPanel>
+                        <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
+                          <ModulesTab />
+                        </S.StyledTabPanel>
+                        <S.StyledTabPanel value={SIDEBAR_ITEMS.SERVICES.value}>
+                          <ServicesTab />
+                        </S.StyledTabPanel>
+                      </>
+                    )}
                     <S.StyledTabPanel value={SIDEBAR_ITEMS.SHIFTS.value}>
                       <ShiftsTab />
                     </S.StyledTabPanel>
