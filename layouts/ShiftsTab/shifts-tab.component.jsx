@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import * as S from "./shifts-tab.styles";
-import { changeShiftStatus, getShiftsByUser } from "../../lib/uar-api-utils";
+import { changeShiftStatus, getMineShifts } from "../../lib/uar-api-utils";
 import { Box, Grid, IconButton, Tooltip } from "@mui/material";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import { SHIFT_STATUS } from "../../lib/constants";
@@ -23,10 +23,10 @@ const ShiftsTab = () => {
     ({ state }) => state === SHIFT_STATUS.IN_PROGRESS
   );
 
-  // console.log("completedShifts :>> ", completedShifts);
+  // console.log("currentShift :>> ", currentShift);
   const handleGetShifts = async () => {
-    const res = await getShiftsByUser();
-    console.log("res :>> ", res);
+    const res = await getMineShifts();
+    // console.log("res :>> ", res);
     setShifts(res?.shifts);
   };
 
@@ -70,7 +70,7 @@ const ShiftsTab = () => {
 
   return (
     <S.Wrapper>
-      {shifts.length > 0 ? (
+      {shifts?.length > 0 ? (
         <>
           <Grid container spacing={4}>
             <Grid item xs={6}>
@@ -81,7 +81,7 @@ const ShiftsTab = () => {
                     <S.QueueItem
                       key={`pending-shift-${index}`}
                       code={shift.code}
-                      module={shift.currentModule.name}
+                      module={shift.module?.name}
                       // status={shift.state}
                     />
                   ))}
@@ -101,7 +101,7 @@ const ShiftsTab = () => {
                     <S.QueueItem
                       key={`completed-shift-${index}`}
                       code={shift.code}
-                      module={shift.module?._id?.name}
+                      module={shift.module?.name}
                       status={shift.state}
                     />
                   ))}
@@ -122,7 +122,7 @@ const ShiftsTab = () => {
                   <Grid item xs={6}>
                     <S.QueueItem
                       code={currentShift.code}
-                      module={currentShift.module._id.name}
+                      module={currentShift.module?.name}
                     />
                   </Grid>
                   <Grid item xs={6}>

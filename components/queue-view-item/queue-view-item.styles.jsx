@@ -51,6 +51,7 @@ export const Status = styled.div`
 export const RightWrapper = styled.div`
   padding: 1rem 1.5rem;
   background-color: ${({ theme }) => theme.palette.primary.main};
+  height: 100%;
 `;
 
 export const Name = styled(Typography)`
