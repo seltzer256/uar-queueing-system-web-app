@@ -16,13 +16,16 @@ const ShiftsTab = () => {
     ({ state }) => state === SHIFT_STATUS.ON_HOLD
   );
   const completedShifts = shifts?.filter(
-    ({ state }) =>
-      state === SHIFT_STATUS.CANCELLED || state === SHIFT_STATUS.COMPLETED
+    ({ state, module: { user = {} } = {} }) =>
+      state === SHIFT_STATUS.CANCELLED ||
+      (state === SHIFT_STATUS.COMPLETED && userData?._id === user?._id)
   );
   const currentShift = shifts?.find(
-    ({ state }) => state === SHIFT_STATUS.IN_PROGRESS
+    ({ state, module: { user = {} } = {} }) =>
+      state === SHIFT_STATUS.IN_PROGRESS && userData?._id === user?._id
   );
 
+  // console.log("userData :>> ", userData);
   // console.log("currentShift :>> ", currentShift);
   const handleGetShifts = async () => {
     const res = await getMineShifts();
@@ -53,10 +56,12 @@ const ShiftsTab = () => {
     socket.connect();
 
     socket.on("shiftCreated", (data) => {
-      // if (userData._id === data) {
-      // console.log("data :>> ", data);
       handleGetShifts();
       // }
+    });
+
+    socket.on("shiftUpdated", (data) => {
+      handleGetShifts();
     });
 
     return () => {
