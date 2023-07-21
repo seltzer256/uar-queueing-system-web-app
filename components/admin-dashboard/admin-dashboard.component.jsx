@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./admin-dashboard.styles";
 import {
   getAttendingTimesByUser,
-  getModules,
+  getServices,
   getTodayShiftsByUsers,
 } from "../../lib/uar-api-utils";
 import { Bar } from "react-chartjs-2";
@@ -23,25 +23,25 @@ import { Grid } from "@mui/material";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const AdminDashboard = () => {
-  const [modules, setModules] = useState([]);
-  const [selectedModule, setSelectedModule] = useState(null);
+  const [services, setServices] = useState([]);
+  const [selectedService, setSelectedService] = useState(null);
   const [dateValue, setDateValue] = useState(dayjs());
   const [firstChartData, setFirstChartData] = useState(null);
   const [secondChartData, setSecondChartData] = useState(null);
 
-  const handleGetModules = async () => {
-    const res = await getModules();
+  const handleGetServices = async () => {
+    const res = await getServices();
     // console.log("res :>> ", res);
-    setModules(res?.data);
+    setServices(res?.data);
   };
 
   const getShiftsByUser = async () => {
     // console.log("dateValue :>> ", dateValue);
     const res = await getTodayShiftsByUsers(
       dayjs(dateValue).format("YYYY-MM-DD"),
-      selectedModule
+      selectedService
     );
-    // console.log("res :>> ", res);
+    console.log("res :>> ", res);
     const labels = res.data.map(({ user }) => user);
     // console.log("labels :>> ", labels);
     const datasets = [
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
   const getAttendingTimes = async () => {
     const res = await getAttendingTimesByUser(
       dayjs(dateValue).format("YYYY-MM-DD"),
-      selectedModule
+      selectedService
     );
 
     // console.log("res :>> ", res);
@@ -80,14 +80,14 @@ const AdminDashboard = () => {
 
   const handleChangeService = (service) => {
     console.log("service :>> ", service);
-    setSelectedModule(service);
+    setSelectedService(service);
   };
 
   useEffect(() => {
-    handleGetModules();
+    handleGetServices();
     getShiftsByUser();
     getAttendingTimes();
-  }, [dateValue, selectedModule]);
+  }, [dateValue, selectedService]);
   return (
     <S.Wrapper>
       <S.StyledBox style={{ marginBottom: "1rem" }}>
@@ -105,12 +105,12 @@ const AdminDashboard = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <S.StyledSelect
-              items={modules}
+              items={services}
               titleKey="name"
               valueKey="_id"
-              label="Módulos"
+              label="Servicios"
               defaultValue=""
-              placeholder="Todos los módulos"
+              placeholder="Todos los servicios"
               onChange={handleChangeService}
             />
           </Grid>
@@ -128,7 +128,7 @@ const AdminDashboard = () => {
             />
           )}
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <S.Title>Tiempo de atención promedio</S.Title>
           {secondChartData && (
             <Bar
