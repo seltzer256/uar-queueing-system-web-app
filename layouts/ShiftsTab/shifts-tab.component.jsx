@@ -121,7 +121,7 @@ const ShiftsTab = () => {
                       code={currentShift.code}
                       module={currentShift.module?.name}
                     />
-                    {currentShift?.client.name && (
+                    {currentShift?.client?.name && (
                       <S.ClientName>
                         Nombre: <span>{currentShift?.client.name}</span>
                       </S.ClientName>
