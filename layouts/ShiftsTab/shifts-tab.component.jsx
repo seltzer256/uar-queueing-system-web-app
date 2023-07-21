@@ -43,10 +43,9 @@ const ShiftsTab = () => {
 
   const handleChangeStatus = async (status) => {
     await changeShiftStatus(currentShift._id, status);
-    if (pendingShifts.length > 0) {
-      await changeShiftStatus(pendingShifts[0]._id, SHIFT_STATUS.IN_PROGRESS);
-    }
-    // console.log("change :>> ", change);
+    // if (pendingShifts.length > 0) {
+    //   await changeShiftStatus(pendingShifts[0]._id, SHIFT_STATUS.IN_PROGRESS);
+    // }
     handleGetShifts();
   };
 
