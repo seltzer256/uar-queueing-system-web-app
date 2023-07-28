@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./shift-assignment.styles";
 import { Box, Container, Grid } from "@mui/material";
 import CustomImage from "../custom-image/custom-image.component";
@@ -72,7 +72,7 @@ const ShiftAssignment = () => {
     }
     // console.log("data :>> ", data);
     const shiftRes = await placeShift(data);
-    console.log("shiftRes :>> ", shiftRes);
+    // console.log("shiftRes :>> ", shiftRes);
     if (shiftRes?.status === "success") {
       toast.success("Turno creado correctamente");
       setValue("clientName", "");
