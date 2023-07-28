@@ -6,16 +6,17 @@ import dynamic from "next/dynamic";
 import CustomImage from "../../components/custom-image/custom-image.component";
 import { getAllShifts } from "../../lib/uar-api-utils";
 import socket from "../../lib/socket";
+import { IS_PRODUCTION } from "../../lib/constants";
 
 const QueueView = ({ bgImage }) => {
   const [shifts, setShifts] = useState([]);
-  const currentShift = shifts[0];
+  const currentShift = shifts?.length > 0 ? shifts[0] : {};
   // console.log("title :>> ", title);
 
   const handleGetShifts = async () => {
     const res = await getAllShifts("/today");
     console.log("res :>> ", res);
-    setShifts(res?.data);
+    setShifts(res?.data ?? []);
   };
 
   useEffect(() => {
@@ -40,25 +41,27 @@ const QueueView = ({ bgImage }) => {
   return (
     <S.Section img={bgImage}>
       <Container maxWidth="xl">
-        <S.ImageWrapper href="/">
+        {IS_PRODUCTION ? (
           <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
-        </S.ImageWrapper>
+        ) : (
+          <S.ImageWrapper href="/">
+            <CustomImage img="/assets/images/espe.png" alt="ESPE logo" />
+          </S.ImageWrapper>
+        )}
         <Grid container spacing={8}>
-          {shifts.length > 0 && (
-            <Grid item xs={12} md={6}>
-              <Grid container spacing={3}>
-                {shifts.map((shift) => (
-                  <Grid item xs={12} key={shift._id}>
-                    <QueueViewItem
-                      code={shift.code}
-                      module={shift.module?.code}
-                      status={shift.state}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
+          <Grid item xs={12} md={shifts.length > 0 ? 6 : 0}>
+            <Grid container spacing={3}>
+              {shifts.map((shift) => (
+                <Grid item xs={12} key={shift._id}>
+                  <QueueViewItem
+                    code={shift.code}
+                    module={shift.module?.code}
+                    status={shift.state}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          )}
+          </Grid>
           <Grid
             item
             xs={12}
@@ -67,10 +70,10 @@ const QueueView = ({ bgImage }) => {
           >
             <S.RightWrapper>
               {/* <S.Subtitle>Turno</S.Subtitle> */}
-              <S.StyledBox>
+              {/* <S.StyledBox>
                 <S.ShiftTitle>{currentShift?.code}</S.ShiftTitle>
-                <S.Module>{currentShift?.module.code}</S.Module>
-              </S.StyledBox>
+                <S.Module>{currentShift?.module?.code}</S.Module>
+              </S.StyledBox> */}
               <DynamicClock hideBorder={shifts.length === 0} />
             </S.RightWrapper>
           </Grid>

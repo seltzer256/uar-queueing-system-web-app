@@ -6,7 +6,7 @@ import Clock from "react-clock";
 const QueueClock = ({ hideBorder }) => {
   dayjs.locale("es");
   const timeInterval = 1000;
-  const [leftTime, setLeftTime] = useState(155000);
+  // const [leftTime, setLeftTime] = useState(155000);
   const [clockValue, setClockValue] = useState(new Date());
 
   const formattedDate = dayjs(clockValue).format("MMMM DD, hh:mm A");
@@ -16,7 +16,7 @@ const QueueClock = ({ hideBorder }) => {
     const interval = setInterval(() => {
       setClockValue(new Date());
 
-      setLeftTime((time) => (time > 0 ? time - timeInterval : 0));
+      // setLeftTime((time) => (time > 0 ? time - timeInterval : 0));
     }, timeInterval);
 
     return () => {
@@ -26,11 +26,11 @@ const QueueClock = ({ hideBorder }) => {
 
   return (
     <S.ClockWrapper style={{ border: hideBorder ? "none" : "" }}>
-      {leftTime > 0 && (
+      {/* {leftTime > 0 && (
         <S.Time style={{ textTransform: "none" }}>
           Tiempo de expera aprox. {dayjs(leftTime).format("mm")} min
         </S.Time>
-      )}
+      )} */}
       <div style={{ position: "relative" }}>
         <Clock
           value={clockValue}

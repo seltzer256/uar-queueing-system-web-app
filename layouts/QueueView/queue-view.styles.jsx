@@ -7,11 +7,13 @@ import CustomLink from "../../components/custom-link/custom-link.component";
 export const Section = styled(CustomBgImage)`
   flex: 1;
   padding: 3rem 0;
+  height: 100vh;
   > img {
     opacity: 0.35;
   }
   > .MuiContainer-root {
     position: relative;
+    height: 100%;
   }
   .right-wrapper {
     transition: all 0.3s ease-in-out;
