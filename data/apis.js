@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 export const uarApi = axios.create({
-  baseURL: "http://localhost:3001/api/v1",
+  baseURL: `${process.env.NEXT_PUBLIC_LOCAL_API}/api/v1`,
 });
 
 export const forismaticApi = axios.create({
