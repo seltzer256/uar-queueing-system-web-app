@@ -108,8 +108,12 @@ const ShiftDialog = ({
             <S.Service>{shiftCreated?.service?.name}</S.Service>
             <Typography sx={{ textAlign: "center" }}>
               Clientes en espera: {shiftCreated?.waiting} <br />
-              Tiempo de espera promedio:{" "}
-              {Math.floor(shiftCreated?.averageWaitTime)}min
+              {shiftCreated?.averageWaitTime > 0 && (
+                <>
+                  Tiempo de espera promedio:{" "}
+                  {Math.floor(shiftCreated?.averageWaitTime)}min
+                </>
+              )}
             </Typography>
           </S.TicketWrapper>
         </Collapse>
