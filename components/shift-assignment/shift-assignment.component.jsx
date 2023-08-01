@@ -13,8 +13,8 @@ import ShiftDialog from "../shift-dialog/shift-dialog.component";
 
 const ShiftAssignment = () => {
   const methods = useForm({
-    mode: "onBlur",
-    reValidateMode: "onBlur",
+    mode: "onChange",
+    reValidateMode: "onChange",
     defaultValues: {
       printTicket: false,
     },

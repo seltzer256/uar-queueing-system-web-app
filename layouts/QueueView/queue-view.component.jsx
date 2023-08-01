@@ -49,7 +49,12 @@ const QueueView = ({ bgImage }) => {
           </S.ImageWrapper>
         )}
         <Grid container spacing={8}>
-          <Grid item xs={12} md={shifts.length > 0 ? 6 : 0}>
+          <Grid
+            item
+            xs={12}
+            md={shifts.length > 0 ? 6 : 0}
+            className="left-wrapper"
+          >
             <Grid container spacing={3}>
               {shifts.map((shift) => (
                 <Grid item xs={12} key={shift._id}>

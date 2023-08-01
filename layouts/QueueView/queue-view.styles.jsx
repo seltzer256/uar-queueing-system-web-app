@@ -18,6 +18,9 @@ export const Section = styled(CustomBgImage)`
   .right-wrapper {
     transition: all 0.3s ease-in-out;
   }
+  .left-wrapper {
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 export const ImageWrapper = styled(CustomLink)`

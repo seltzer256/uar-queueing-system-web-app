@@ -19,6 +19,7 @@ const CustomInput = ({
   defaultValue = "",
   hideShowPass,
   hideVisibility,
+  onBlur,
   ...otherProps
 }) => {
   const isPassword = type === "password";
@@ -29,6 +30,13 @@ const CustomInput = ({
   } = useFormContext();
 
   const error = getRHFErrorMessage(errors, name, validations);
+
+  const handleBlur = (controlledBlur, evt) => {
+    controlledBlur(evt);
+    if (onBlur) {
+      onBlur(evt);
+    }
+  };
 
   return (
     <S.InputContainer className={className}>
@@ -66,6 +74,7 @@ const CustomInput = ({
             }
             {...otherProps}
             {...field}
+            onBlur={(evt) => handleBlur(field.onBlur, evt)}
           />
         )}
       />

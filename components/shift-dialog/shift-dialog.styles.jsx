@@ -5,12 +5,13 @@ import CustomCheckbox from "../custom-checkbox/custom-checkbox.component";
 export const StyledDialog = styled(Dialog)`
   .MuiPaper-root {
     overflow: visible;
+    max-width: unset;
   }
 `;
 
 export const Wrapper = styled.div`
   padding: 2.5rem 1.75rem;
-  width: 550px;
+  width: 750px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
