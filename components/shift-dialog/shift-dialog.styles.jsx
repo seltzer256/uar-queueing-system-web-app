@@ -29,10 +29,11 @@ export const CloseBtn = styled(IconButton)`
 `;
 
 export const Title = styled(Typography)`
-  font-size: 1.75rem;
-  line-height: 2.25rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   color: ${({ theme }) => theme.palette.primary.main};
   font-weight: 700;
+  margin-bottom: 0.5rem;
 `;
 
 export const Subtitle = styled(Typography)`
@@ -70,4 +71,12 @@ export const Service = styled(Typography)`
   line-height: 2rem;
   font-weight: 500;
   text-align: center;
+`;
+
+export const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  > div {
+    max-width: 120px;
+  }
 `;

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   background: ${({ theme }) => theme.palette.text.light};
   transition: all 0.3s ease-in-out;
   display: block;
-  height: 100%;
+  min-height: 104px;
   padding: 1rem 1.25rem;
   border-radius: 8px;
   overflow: hidden;
@@ -35,7 +35,7 @@ export const Name = styled(Typography)`
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 2.25rem;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 `;

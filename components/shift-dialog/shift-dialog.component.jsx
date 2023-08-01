@@ -7,6 +7,7 @@ import { Collapse, Stack, Typography } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useReactToPrint } from "react-to-print";
 import { useFormContext } from "react-hook-form";
+import CustomImage from "../custom-image/custom-image.component";
 
 const ShiftDialog = ({
   isOpen,
@@ -66,15 +67,27 @@ const ShiftDialog = ({
             name="printTicket"
             label="¿Desea Imprimir su ticket?"
           />
+          {!authRequired && !watch("printTicket") && (
+            <>
+              <S.Title style={{ marginTop: "1rem" }}>
+                Ingrese su correo:
+              </S.Title>
+              <CustomInput
+                name="clientEmail"
+                autoComplete="off"
+                label="Email"
+                type="email"
+                validations={{
+                  required: true,
+                  pattern: emailRegex,
+                }}
+                style={{ marginBottom: "1rem" }}
+              />
+            </>
+          )}
           <S.Subtitle>
-            {authRequired
-              ? `
-                Recuerde que será enviado un correo con la información.
-                `
-              : `
-                Si no desea imprimir su ticket, será presentada la información en pantalla, 
-                de la cuál deberá tomar una fotografía.
-                `}
+            Si no desea imprimir su ticket recuerde que será enviado un correo
+            con la información.
           </S.Subtitle>
           <CustomButton
             type="submit"
@@ -87,7 +100,10 @@ const ShiftDialog = ({
         </Collapse>
         <Collapse in={!!shiftCreated}>
           <S.TicketWrapper ref={ticketRef}>
-            <S.Title>Ticket</S.Title>
+            {/* <S.Title>Ticket</S.Title> */}
+            <S.LogoWrapper>
+              <CustomImage img="/assets/images/espe-logo.jpg" alt="ESPE logo" />
+            </S.LogoWrapper>
             <S.TicketCode>{shiftCreated?.code}</S.TicketCode>
             <S.Service>
               {shiftCreated?.service?.name} - {shiftCreated?.service?.code}

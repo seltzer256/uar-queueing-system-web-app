@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     const res = await handleSignIn(data.email, data.password);
     if (res?.status === "fail") {
-      setErrorMessage(res?.message);
+      setErrorMessage(res?.message ?? "Usuario o contrasena incorrectos");
       return;
     }
     setCookie(null, "jwt", res?.token, {
