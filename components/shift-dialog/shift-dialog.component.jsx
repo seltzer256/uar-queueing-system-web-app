@@ -105,10 +105,12 @@ const ShiftDialog = ({
               <CustomImage img="/assets/images/espe-logo.jpg" alt="ESPE logo" />
             </S.LogoWrapper>
             <S.TicketCode>{shiftCreated?.code}</S.TicketCode>
-            <S.Service>
-              {shiftCreated?.service?.name} - {shiftCreated?.service?.code}
-            </S.Service>
-            <Typography>Clientes en espera: {shiftCreated?.waiting}</Typography>
+            <S.Service>{shiftCreated?.service?.name}</S.Service>
+            <Typography sx={{ textAlign: "center" }}>
+              Clientes en espera: {shiftCreated?.waiting} <br />
+              Tiempo de espera promedio:{" "}
+              {Math.floor(shiftCreated?.averageWaitTime)}min
+            </Typography>
           </S.TicketWrapper>
         </Collapse>
       </S.Wrapper>
