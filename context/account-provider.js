@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getMe, signIn, signUp, updateMe } from "../lib/uar-api-utils";
-import { destroyCookie } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 export const AccountContext = React.createContext();
@@ -15,10 +15,14 @@ const AccountProvider = (props) => {
 
   // console.log("userData :>> ", userData);
   const getUserData = async () => {
+    const cookies = parseCookies();
+    const token = cookies?.jwt;
+    if (!token) return;
+
     setIsAccountLoading(true);
     const data = await getMe();
     // console.log("data :>> ", data);
-    if (!data || data.status === "error") {
+    if (!data || data.status === "fail" || data.status === "error") {
       setIsAccountLoading(false);
       setUserData(null);
       destroyCookie(undefined, "jwt", {
