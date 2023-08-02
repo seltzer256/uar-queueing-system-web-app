@@ -45,6 +45,7 @@ const AccountProvider = (props) => {
   const handleSignIn = async (email, password) => {
     setIsAccountLoading(true);
     const res = await signIn(email, password);
+    // console.log("res :>> ", res);
     if (res?.status === "success") {
       setUserData(res?.data?.user);
     }
@@ -63,8 +64,11 @@ const AccountProvider = (props) => {
     return res;
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setUserData(null);
+    const newData = { ...userData, isAvailable: false };
+    // console.log("newData :>> ", newData);
+    await updateMe(newData);
     destroyCookie(undefined, "jwt", {
       path: "/",
     });
