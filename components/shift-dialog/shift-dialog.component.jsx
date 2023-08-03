@@ -30,6 +30,7 @@ const ShiftDialog = ({
     setIsOpen(false);
     setShiftCreated(null);
     setKeyboardInput(null);
+    setValue("printTicket", true);
   };
 
   const handleFocusInput = (evt) => {
@@ -37,11 +38,6 @@ const ShiftDialog = ({
 
     // console.log("evt :>> ", evt);
     setKeyboardInput(name);
-  };
-
-  const handleKeyboard = (evt) => {
-    console.log("evt :>> ", evt);
-    setValue(keyboardInput, evt);
   };
 
   const onKeyPress = (button) => {

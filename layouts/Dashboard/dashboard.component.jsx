@@ -9,6 +9,7 @@ import ServicesTab from "../ServicesTab/services-tab.component";
 import ShiftsTab from "../ShiftsTab/shifts-tab.component";
 import Spinner from "../../components/spinner/spinner.component";
 import AdminDashboard from "../../components/admin-dashboard/admin-dashboard.component";
+import UsersTab from "../UsersTab/users-tab.component";
 
 const Dashboard = () => {
   const { isAccountLoading, userData } = useContext(AccountContext);
@@ -65,6 +66,9 @@ const Dashboard = () => {
                       <>
                         <S.StyledTabPanel value={SIDEBAR_ITEMS.DASHBOARD.value}>
                           <AdminDashboard />
+                        </S.StyledTabPanel>
+                        <S.StyledTabPanel value={SIDEBAR_ITEMS.USERS.value}>
+                          <UsersTab />
                         </S.StyledTabPanel>
                         <S.StyledTabPanel value={SIDEBAR_ITEMS.MODULES.value}>
                           <ModulesTab />

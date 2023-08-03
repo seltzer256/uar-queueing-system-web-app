@@ -16,7 +16,7 @@ const ShiftAssignment = () => {
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      printTicket: false,
+      printTicket: true,
     },
   });
   const [serviceIndex, setServiceIndex] = useState(0);

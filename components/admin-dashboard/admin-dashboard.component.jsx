@@ -41,7 +41,7 @@ const AdminDashboard = () => {
       dayjs(dateValue).format("YYYY-MM-DD"),
       selectedService
     );
-    console.log("res :>> ", res);
+    // console.log("res :>> ", res);
     const labels = res.data.map(({ user }) => user);
     // console.log("labels :>> ", labels);
     const datasets = [
