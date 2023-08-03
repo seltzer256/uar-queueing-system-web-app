@@ -7,7 +7,7 @@ import { useScrollTrigger } from "@mui/material";
 import CustomImage from "../custom-image/custom-image.component.jsx";
 import { useRouter } from "next/router.js";
 
-const Header = ({ hideLogin, hideRegister, staticNav }) => {
+const Header = ({ hideLogin, staticNav }) => {
   const router = useRouter();
   const {
     isLoggedIn,
@@ -82,13 +82,8 @@ const Header = ({ hideLogin, hideRegister, staticNav }) => {
             </div>
           ) : (
             <>
-              {!hideRegister && (
-                <CustomButton href="/register">Registrarse</CustomButton>
-              )}
               {!hideLogin && (
-                <CustomButton className="light" href="/login">
-                  Ingresar
-                </CustomButton>
+                <CustomButton href="/login">Ingresar</CustomButton>
               )}
             </>
           )}

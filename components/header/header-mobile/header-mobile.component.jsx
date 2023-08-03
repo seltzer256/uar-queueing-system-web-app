@@ -15,7 +15,6 @@ const HeaderMobile = ({ isActiveMenu, items }) => {
         </S.LinksWrapper>
         <S.LoginRegisterBox>
           <S.Link url="/login">Login</S.Link>/
-          <S.Link url="/register">Register</S.Link>
         </S.LoginRegisterBox>
       </S.HeaderMobile>
     </Fade>

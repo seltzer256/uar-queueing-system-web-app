@@ -26,7 +26,6 @@ const DashboardPage = () => {
     <Layout
       hideFooter
       hideLogin
-      hideRegister
       staticNav
       seo={{
         title: "Dashboard",

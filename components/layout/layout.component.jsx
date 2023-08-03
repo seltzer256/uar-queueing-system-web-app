@@ -19,7 +19,6 @@ const Layout = ({
   seo,
   children,
   hideLogin,
-  hideRegister,
   hideTopPadding,
   hideFooter,
   hideHeader,
@@ -28,13 +27,7 @@ const Layout = ({
   return (
     <>
       {seo && <SEO data={seo} />}
-      {!hideHeader && (
-        <Header
-          hideLogin={hideLogin}
-          hideRegister={hideRegister}
-          staticNav={staticNav}
-        />
-      )}
+      {!hideHeader && <Header hideLogin={hideLogin} staticNav={staticNav} />}
       <AppContainer
         hidepadding={hideTopPadding ? 1 : 0}
         staticnav={staticNav ? 1 : 0}
