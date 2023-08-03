@@ -18,6 +18,7 @@ const ShiftDialog = ({
   authRequired,
   shiftCreated,
   setShiftCreated,
+  isLoading,
 }) => {
   const { watch, setValue } = useFormContext();
   const ticketRef = useRef(null);
@@ -132,6 +133,7 @@ const ShiftDialog = ({
             fullWidth
             style={{ marginTop: "1rem" }}
             form="shift-assignment-form"
+            loading={isLoading}
           >
             Obtener
           </CustomButton>

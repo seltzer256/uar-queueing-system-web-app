@@ -177,6 +177,7 @@ const ShiftAssignment = () => {
           setIsOpen={setIsOpenDialog}
           shiftCreated={shiftCreated}
           setShiftCreated={setShiftCreated}
+          isLoading={loading}
         />
       </form>
     </FormProvider>
