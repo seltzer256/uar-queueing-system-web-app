@@ -26,7 +26,7 @@ const ShiftAssignment = () => {
   const [shiftCreated, setShiftCreated] = useState(null);
 
   const selectedService = services[serviceIndex];
-  const { handleSubmit, setValue } = methods;
+  const { handleSubmit, setValue, watch } = methods;
 
   // console.log("selectedService :>> ", selectedService);
   const handleSelected = (index) => {
@@ -47,26 +47,7 @@ const ShiftAssignment = () => {
 
     data.serviceId = selectedService._id;
 
-    let isAvailableService = false;
-    selectedService?.users?.map((user) => {
-      if (user?.isAvailable) {
-        isAvailableService = true;
-      }
-    });
-
-    if (!isAvailableService) {
-      toast.error("Servicio no disponible");
-      setLoading(false);
-      return;
-    }
-
-    const selectedUser = selectedService?.users?.find(
-      (el) => el._id === data.userId
-    );
-
-    // console.log("selectedUser :>> ", selectedUser);
-    if (selectedService?.chooseRequired && !selectedUser?.isAvailable) {
-      toast.error("Encargado no disponible");
+    if (!validateAvailability()) {
       setLoading(false);
       return;
     }
@@ -83,6 +64,37 @@ const ShiftAssignment = () => {
       return;
     }
     setLoading(false);
+  };
+
+  const validateAvailability = () => {
+    let isAvailableService = false;
+    selectedService?.users?.map((user) => {
+      if (user?.isAvailable) {
+        isAvailableService = true;
+      }
+    });
+
+    if (!isAvailableService) {
+      toast.error("Servicio no disponible");
+      return false;
+    }
+
+    const selectedUser = selectedService?.users?.find(
+      (el) => el._id === watch("userId")
+    );
+
+    // console.log("selectedUser :>> ", selectedUser);
+    if (selectedService?.chooseRequired && !selectedUser?.isAvailable) {
+      toast.error("Encargado no disponible");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleOpenDialog = () => {
+    if (!validateAvailability()) return;
+    setIsOpenDialog(true);
   };
 
   useEffect(() => {
@@ -151,10 +163,7 @@ const ShiftAssignment = () => {
                       )}
                     </S.CurrentService>
                   </Box>
-                  <S.StyledBtn
-                    loading={loading}
-                    onClick={() => setIsOpenDialog(true)}
-                  >
+                  <S.StyledBtn loading={loading} onClick={handleOpenDialog}>
                     Obtener Ticket
                   </S.StyledBtn>
                 </S.RightWrapper>
