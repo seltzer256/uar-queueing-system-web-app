@@ -120,7 +120,7 @@ const ModulesTab = () => {
   }, []);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper id="modules-wrapper">
       <S.TableWrapper>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -166,7 +166,7 @@ const ModulesTab = () => {
             <IconButton onClick={handleAddNew}>
               <AddCircleOutlineIcon htmlColor="#0B6706" />
             </IconButton>
-            <IconButton onClick={handleDelete}>
+            <IconButton onClick={handleDelete} data-test="module-btn-delete">
               <DeleteIcon htmlColor="#D32F2F" />
             </IconButton>
           </S.StyledBox>
@@ -179,12 +179,18 @@ const ModulesTab = () => {
               <CustomInput
                 name={"name"}
                 label={"Nombre"}
+                inputProps={{
+                  "data-test": "module-name",
+                }}
                 validations={{ required: true }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomInput
                 name={"code"}
+                inputProps={{
+                  "data-test": "module-code",
+                }}
                 label={"Código"}
                 validations={{ required: true }}
               />
@@ -229,7 +235,9 @@ const ModulesTab = () => {
             </Grid>
           </Grid>
           <S.BottomWrapper>
-            <CustomButton type="submit">Guardar</CustomButton>
+            <CustomButton type="submit" data-test="module-btn-save">
+              Guardar
+            </CustomButton>
           </S.BottomWrapper>
         </S.StyledForm>
       </FormProvider>
