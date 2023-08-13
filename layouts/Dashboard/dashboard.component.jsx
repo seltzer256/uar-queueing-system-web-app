@@ -42,6 +42,7 @@ const Dashboard = () => {
                           value={value}
                           icon={icon}
                           key={`tab-btn-${index}`}
+                          data-test={`tab-${value}`}
                         />
                       )
                     ) : (
@@ -50,6 +51,7 @@ const Dashboard = () => {
                         label={name}
                         value={value}
                         icon={icon}
+                        data-test={`tab-${value}`}
                         key={`tab-btn-${index}`}
                       />
                     )

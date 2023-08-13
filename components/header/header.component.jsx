@@ -56,7 +56,10 @@ const Header = ({ hideLogin, staticNav }) => {
         <S.RightWrapper>
           {isLoggedIn ? (
             <div>
-              <S.AccountWrapper onClick={handleOpenAccMenu}>
+              <S.AccountWrapper
+                onClick={handleOpenAccMenu}
+                data-test="menu-btn"
+              >
                 <S.AccountAvatar img={avatar} alt="avatar" />
                 <ArrowDropDownIcon />
               </S.AccountWrapper>
@@ -66,7 +69,9 @@ const Header = ({ hideLogin, staticNav }) => {
                 onClose={handleCloseAccMenu}
               >
                 <S.AccountBox onClick={() => router.push("/perfil")}>
-                  <S.AccountName>{userData?.name}</S.AccountName>
+                  <S.AccountName data-test="menu-profile">
+                    {userData?.name}
+                  </S.AccountName>
                 </S.AccountBox>
                 <S.AccountBox onClick={handleChangeAvailable}>
                   <S.AccountName>Disponible</S.AccountName>

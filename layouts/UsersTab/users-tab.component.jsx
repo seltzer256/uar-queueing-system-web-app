@@ -152,6 +152,7 @@ const UsersTab = () => {
               <CustomInput
                 name={"name"}
                 label={"Nombre"}
+                data-test={"user-name"}
                 validations={{ required: true }}
               />
             </Grid>
@@ -159,6 +160,7 @@ const UsersTab = () => {
               <CustomInput
                 name={"email"}
                 label={"Email"}
+                data-test={"user-email"}
                 validations={{ required: true }}
               />
             </Grid>
@@ -167,6 +169,7 @@ const UsersTab = () => {
                 <CustomInput
                   name={"password"}
                   label={"Contraseña"}
+                  data-test={"user-password"}
                   type="password"
                   validations={{ required: true }}
                 />
@@ -180,7 +183,9 @@ const UsersTab = () => {
             </Grid>
           </Grid>
           <S.BottomWrapper>
-            <CustomButton type="submit">Guardar</CustomButton>
+            <CustomButton type="submit" data-test="user-btn-save">
+              Guardar
+            </CustomButton>
           </S.BottomWrapper>
         </S.StyledForm>
       </FormProvider>

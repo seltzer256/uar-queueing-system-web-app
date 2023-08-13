@@ -121,6 +121,9 @@ const Summary = () => {
                   autoComplete="given-name"
                   name="name"
                   label="Nombre"
+                  inputProps={{
+                    "data-test": "profile-name",
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -159,6 +162,7 @@ const Summary = () => {
             type="submit"
             form="information-form"
             loading={isAccountLoading}
+            data-test="profile-btn-save"
           >
             Guardar
           </S.StyledBtn>
