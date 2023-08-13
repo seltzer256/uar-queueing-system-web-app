@@ -139,6 +139,7 @@ const ShiftsTab = () => {
                         enterNextDelay={500}
                       >
                         <IconButton
+                          data-test="complete-shift"
                           onClick={() =>
                             handleChangeStatus(SHIFT_STATUS.COMPLETED)
                           }
@@ -169,7 +170,10 @@ const ShiftsTab = () => {
                   <S.StyledBox
                     style={{ justifyContent: "center", minHeight: "100px" }}
                   >
-                    <CustomButton onClick={handleGetStarted}>
+                    <CustomButton
+                      onClick={handleGetStarted}
+                      data-test="begin-shift"
+                    >
                       Empezar
                     </CustomButton>
                   </S.StyledBox>

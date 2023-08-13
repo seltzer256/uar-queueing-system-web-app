@@ -14,7 +14,7 @@ const QueueViewItem = ({ code, module, status, ...props }) => {
         </Grid>
         <Grid item xs={8}>
           <S.RightWrapper className="side-wrapper">
-            <S.Module>{module}</S.Module>
+            <S.Module data-test="module-name">{module}</S.Module>
           </S.RightWrapper>
         </Grid>
       </Grid>
