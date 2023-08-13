@@ -134,7 +134,7 @@ const ServicesTab = () => {
             <IconButton onClick={handleAddNew}>
               <AddCircleOutlineIcon htmlColor="#0B6706" />
             </IconButton>
-            <IconButton onClick={handleDelete}>
+            <IconButton onClick={handleDelete} data-test="service-btn-delete">
               <DeleteIcon htmlColor="#D32F2F" />
             </IconButton>
           </S.StyledBox>
@@ -147,6 +147,9 @@ const ServicesTab = () => {
               <CustomInput
                 name={"name"}
                 label={"Nombre"}
+                inputProps={{
+                  "data-test": "service-name",
+                }}
                 validations={{ required: true }}
               />
             </Grid>
@@ -154,6 +157,9 @@ const ServicesTab = () => {
               <CustomInput
                 name={"code"}
                 label={"Código"}
+                inputProps={{
+                  "data-test": "service-code",
+                }}
                 validations={{ required: true }}
               />
             </Grid>
@@ -167,7 +173,11 @@ const ServicesTab = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <CustomCheckbox name="chooseRequired" label="Requiere escoger" />
+              <CustomCheckbox
+                name="chooseRequired"
+                label="Requiere escoger"
+                data-test="service-choose"
+              />
             </Grid>
             <Grid item xs={12}>
               <ControlledWysiwyg
@@ -178,7 +188,9 @@ const ServicesTab = () => {
             </Grid>
           </Grid>
           <S.BottomWrapper>
-            <CustomButton type="submit">Guardar</CustomButton>
+            <CustomButton type="submit" data-test="service-btn-save">
+              Guardar
+            </CustomButton>
           </S.BottomWrapper>
         </S.StyledForm>
       </FormProvider>
