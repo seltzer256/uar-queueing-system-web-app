@@ -51,6 +51,7 @@ const Login = () => {
               name="email"
               autoComplete="email"
               label="Email"
+              id="login-email"
             />
             <CustomInput
               validations={{
@@ -60,10 +61,16 @@ const Login = () => {
               name="password"
               label="Contraseña"
               type="password"
+              id="login-password"
               hideShowPass
             />
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-            <CustomButton fullWidth type="submit" loading={isAccountLoading}>
+            <CustomButton
+              fullWidth
+              type="submit"
+              loading={isAccountLoading}
+              id="login-btn"
+            >
               Ingresar
             </CustomButton>
           </S.StyledBox>
