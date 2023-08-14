@@ -142,6 +142,7 @@ const ShiftAssignment = () => {
                       <Grid item xs={12} key={`service-item-${index}`}>
                         <ServiceItem
                           {...el}
+                          data-test="service-item"
                           className={
                             selectedService?._id === el._id ? "active" : ""
                           }
@@ -163,7 +164,11 @@ const ShiftAssignment = () => {
                       )}
                     </S.CurrentService>
                   </Box>
-                  <S.StyledBtn loading={loading} onClick={handleOpenDialog}>
+                  <S.StyledBtn
+                    loading={loading}
+                    onClick={handleOpenDialog}
+                    data-test="get-ticket-btn"
+                  >
                     Obtener Ticket
                   </S.StyledBtn>
                 </S.RightWrapper>

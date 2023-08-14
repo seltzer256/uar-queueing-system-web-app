@@ -26,29 +26,31 @@ const ModuleOptions = ({ users = [] }) => {
         render={({ field }) => (
           <S.StyledOptionGroup>
             <RadioGroup {...field}>
-              {users.map(({ name, _id, isAvailable }, index) => (
-                <FormControlLabel
-                  value={_id}
-                  control={<Radio />}
-                  disabled={!isAvailable}
-                  label={
-                    isAvailable ? (
-                      name
-                    ) : (
-                      <>
-                        <span className="name">{name}</span>
-                        <span
-                          style={{ color: "#D32F2F" }}
-                          className="unavailable"
-                        >
-                          no disponible
-                        </span>
-                      </>
-                    )
-                  }
-                  key={`option-${index}`}
-                />
-              ))}
+              {users
+                ?.sort((a, b) => a.name.localeCompare(b.name))
+                .map(({ name, _id, isAvailable }, index) => (
+                  <FormControlLabel
+                    value={_id}
+                    control={<Radio />}
+                    disabled={!isAvailable}
+                    label={
+                      isAvailable ? (
+                        name
+                      ) : (
+                        <>
+                          <span className="name">{name}</span>
+                          <span
+                            style={{ color: "#D32F2F" }}
+                            className="unavailable"
+                          >
+                            no disponible
+                          </span>
+                        </>
+                      )
+                    }
+                    key={`option-${index}`}
+                  />
+                ))}
             </RadioGroup>
           </S.StyledOptionGroup>
         )}

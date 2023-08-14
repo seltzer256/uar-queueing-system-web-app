@@ -81,6 +81,9 @@ const ShiftDialog = ({
                 name="clientName"
                 autoComplete="off"
                 label="Nombre"
+                inputProps={{
+                  "data-test": "client-name",
+                }}
                 validations={{
                   required: true,
                 }}
@@ -90,6 +93,9 @@ const ShiftDialog = ({
               <CustomInput
                 name="clientEmail"
                 autoComplete="off"
+                inputProps={{
+                  "data-test": "client-email",
+                }}
                 label="Email"
                 type="email"
                 validations={{
@@ -133,6 +139,7 @@ const ShiftDialog = ({
             fullWidth
             style={{ marginTop: "1rem" }}
             form="shift-assignment-form"
+            data-test="get-ticket-dialog-btn"
             loading={isLoading}
           >
             Obtener
@@ -169,7 +176,11 @@ const ShiftDialog = ({
           <S.TicketWrapper ref={ticketRef}>
             {/* <S.Title>Ticket</S.Title> */}
             <S.LogoWrapper>
-              <CustomImage img="/assets/images/espe-logo.jpg" alt="ESPE logo" />
+              <CustomImage
+                data-test="logo"
+                img="/assets/images/espe-logo.jpg"
+                alt="ESPE logo"
+              />
             </S.LogoWrapper>
             <S.TicketCode>{shiftCreated?.code}</S.TicketCode>
             <S.Service>{shiftCreated?.service?.name}</S.Service>
