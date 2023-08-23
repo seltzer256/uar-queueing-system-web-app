@@ -111,6 +111,7 @@ const AdminDashboard = () => {
               label="Servicios"
               defaultValue=""
               placeholder="Todos los servicios"
+              data-test="service-select"
               onChange={handleChangeService}
             />
           </Grid>

@@ -61,7 +61,7 @@ const CustomSelect = ({
   }
 
   return (
-    <RhfErrorHandler name={name} rules={rules}>
+    <RhfErrorHandler name={name} rules={rules} {...otherProps}>
       <S.StyledFormControl fullWidth variant="outlined">
         {label && (
           <S.StyledLabel className="input-label">
